@@ -1,32 +1,23 @@
+import generateAuthorizationLink from "../utils/generateAuthorizationLink";
+import returnEnvVars from "../utils/returnEnvVars";
+
+export async function loader() {
+  return returnEnvVars();
+}
+
 export default function Index() {
+  const authorizationLink = generateAuthorizationLink();
+  console.log("authorizationLink", authorizationLink);
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li className="text-orange">
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+    <main className="flex justify-center py-10">
+      <div className="max-w-[400px]flex justify-center">
+        <a
+          href={authorizationLink}
+          className="inline-block border border-orange px-2 py-4"
+        >
+          Give authorization!
+        </a>
+      </div>
+    </main>
   );
 }
