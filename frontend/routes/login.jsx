@@ -8,10 +8,12 @@ export const loader = async ({ request }) => {
     request
   );
   if (accessToken && refreshToken && authExpiresIn) {
+    console.log("accessToken, authExpiresIn", accessToken, authExpiresIn);
     return redirect("/stats", {
       headers: {
-        "Set-Cookie": `aToken=${accessToken}; Max-Age=${authExpiresIn}`,
+        // TODO: fix refresh token here
         "Set-Cookie": `rToken=${refreshToken};`,
+        "Set-Cookie": `aToken=${accessToken}; Max-Age=${authExpiresIn}`,
       },
     });
   } else {
