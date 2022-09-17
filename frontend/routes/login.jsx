@@ -22,7 +22,6 @@ export const loader = async ({ request }) => {
 export default function Login() {
   const authorizationLink = generateAuthorizationLink();
 
-  console.log("authorizationLink", authorizationLink);
   return (
     <div>
       <h1>
