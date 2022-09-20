@@ -14,6 +14,7 @@ module.exports = {
       "true-white": "#FFFFFF",
       "gradient-dark-green": "#0D3039",
       "gradient-light-green": "#8FD7CA",
+      transparent: "transparent",
     },
     fontFamily: {
       "barlow-bold": ["barlow-bold"],
