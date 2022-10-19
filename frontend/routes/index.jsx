@@ -9,7 +9,6 @@ export async function loader() {
 
 export default function Index() {
   const authorizationLink = generateAuthorizationLink();
-  console.log("authorizationLink", authorizationLink);
   return (
     <main className="flex justify-center items-centerh-full min-h-screen py-10">
       <Container containerClass="flex flex-col gap-10 justify-center">

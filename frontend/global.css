@@ -108,6 +108,12 @@ p {
   grid-template-rows: max-content 1fr;
 }
 
+.graph-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: max-content 1fr;
+}
+
 @media only screen and (min-width: 768px) {
   :root {
     /* Font sizes + line heights */

@@ -1,18 +1,35 @@
 import { useFetcher } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Cta from "../components/Cta";
+import SquareLoader from "../components/SquareLoader";
 import TextInput from "../components/TextInput";
+import getIntialStats from "../utils/getInitialStats";
 
 export default function Stats() {
+  // TODO: set to null
+  const [data, setData] = useState(null);
+  const [initialStats, setInitialStats] = useState(null);
   const fetcher = useFetcher();
+
   const textInput = useRef();
   const submitButtonRef = useRef();
 
+  const noDataTextRef = useRef(null);
+  const loaderRef = useRef(null);
+  const graphContainerRef = useRef(null);
+
   useEffect(() => {
     if (fetcher.data) {
-      console.log("fetcher.data", fetcher.data);
+      setData(fetcher.data);
     }
   }, [fetcher.data]);
+
+  useEffect(() => {
+    if (data) {
+      const initialStats = getIntialStats(data);
+      setInitialStats(initialStats);
+    }
+  }, [data]);
 
   function fillInId(e, year = 2022) {
     e.preventDefault();
@@ -70,7 +87,7 @@ export default function Stats() {
             <p className="text-body-3 mb-4">Or choose a preset:</p>
             <div className="flex gap-2 flex-wrap">
               <Cta onClick={(e) => fillInId(e, 2021)}>Omroep Grunn</Cta>
-              <Cta onClick={(e) => fillInId(e, 2021)}>
+              <Cta onClick={(e) => fillInId(e, 2022)}>
                 Zweden mixtape vol III
               </Cta>
             </div>
@@ -78,16 +95,54 @@ export default function Stats() {
         </fetcher.Form>
       </aside>
       <main className="px-4 py-10">
-        {
-          <h1 className="font-barlow-bold text-heading-2 text-center">
-            <span className="hidden md:block">
-              👈 Get started by getting playlist data
-            </span>
-            <span className="block md:hidden">
-              👆 Get started by getting playlist data
-            </span>
-          </h1>
-        }
+        {/* NO data selected */}
+        {!data ? (
+          <div ref={noDataTextRef}>
+            <h1 className="font-barlow-bold text-heading-2 text-center">
+              <span className="hidden md:block">
+                👈 Get started by getting playlist data
+              </span>
+              <span className="block md:hidden">
+                👆 Get started by getting playlist data
+              </span>
+            </h1>
+            {/* Loader */}
+            {fetcher?.state && fetcher.state === "submitting" && (
+              <div className="flex justify-center">
+                <SquareLoader />
+              </div>
+            )}
+          </div>
+        ) : (
+          // Data
+          <div className="grid justify-center justify-items-center gap-8">
+            <h2 className="font-barlow-bold text-heading-4 text-center max-w-md">
+              To get you started, here are some general stats for this playlist:
+            </h2>
+            {Array.isArray(initialStats) && (
+              <div className="flex justify-between flex-wrap gap-8">
+                {initialStats.map((stat) => (
+                  <div className="flex flex-col items-center">
+                    <span>{stat.label}</span>
+                    <span className="font-barlow-bold">{stat.value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            {/* Graph options buttons */}
+            <div className="w-full graph-container">
+              <ul>
+                <button
+                  className="underline font-barlow-bold transition-colors hover:text-orange"
+                  onClick={() => console.log("test")}
+                >
+                  Number of songs per artist
+                </button>
+              </ul>
+              <div>GRAPH</div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
