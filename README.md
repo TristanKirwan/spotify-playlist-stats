@@ -9,6 +9,8 @@
 - Average song length per letter
 - Ranking of popularity (most spotify plays)
 - Average # of plays per playlist collaborator
+- Longest song per letter
+- Shortest song per letter
 
 1 off stats:
 

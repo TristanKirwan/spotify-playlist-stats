@@ -94,10 +94,10 @@ export default function Stats() {
           </div>
         </fetcher.Form>
       </aside>
-      <main className="px-4 py-10">
+      <main>
         {/* NO data selected */}
         {!data ? (
-          <div ref={noDataTextRef}>
+          <div className="relative h-full px-4 py-10" ref={noDataTextRef}>
             <h1 className="font-barlow-bold text-heading-2 text-center">
               <span className="hidden md:block">
                 👈 Get started by getting playlist data
@@ -108,21 +108,24 @@ export default function Stats() {
             </h1>
             {/* Loader */}
             {fetcher?.state && fetcher.state === "submitting" && (
-              <div className="flex justify-center">
+              <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-black/30">
                 <SquareLoader />
               </div>
             )}
           </div>
         ) : (
           // Data
-          <div className="grid justify-center justify-items-center gap-8">
-            <h2 className="font-barlow-bold text-heading-4 text-center max-w-md">
-              To get you started, here are some general stats for this playlist:
-            </h2>
+          <div className="grid justify-center justify-items-center gap-8 px-4 py-10">
+            <div className="max-w-md">
+              <h2 className="font-barlow-bold text-heading-4 text-center">
+                To get you started, here are some general stats for this
+                playlist:
+              </h2>
+            </div>
             {Array.isArray(initialStats) && (
-              <div className="flex justify-between flex-wrap gap-8">
+              <div className="flex gap-8 w-full overflow-x-auto">
                 {initialStats.map((stat) => (
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-center shrink-0">
                     <span>{stat.label}</span>
                     <span className="font-barlow-bold">{stat.value}</span>
                   </div>
