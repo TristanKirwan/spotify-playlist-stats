@@ -1,16 +1,18 @@
 # Stats to show:
 
-- Number of songs per letter
-- Number of songs per artist
-- Number of songs per person
-- Length of total music per person
+- Number of songs per letter - Bar chart
+- Number of songs per artist - Bar chart
+- Number of songs per person - Pie chart
+- Length of total music per person - Bar chart
+- % of length of playlist per person - Pie chart
 - Number of songs per genre (if possible)
-- Length of total songs per letter
-- Average song length per letter
-- Ranking of popularity (most spotify plays)
-- Average # of plays per playlist collaborator
-- Longest song per letter
-- Shortest song per letter
+- Length of total songs per letter - Bar chart
+- Average song length per letter - Bar chart
+- Ranking of popularity (most spotify plays) - Table?
+- Average # of plays per playlist collaborator - Bar chart
+- Longest song per letter - No chart
+- Shortest song per letter - No chart
+- Per playlist collaborator max # of songs of a single artist
 
 1 off stats:
 
@@ -18,3 +20,8 @@
 - Total number of tracks
 - Longest song
 - Shortest song
+
+# TO DO:
+
+- Route protection
+- Refresh auth token automatically

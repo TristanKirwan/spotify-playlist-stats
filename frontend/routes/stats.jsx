@@ -1,14 +1,18 @@
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
+import ChartOptionsSidebar from "../components/ChartOptionsSidebar";
+import ChartRenderer from "../components/charts/ChartRenderer";
 import Cta from "../components/Cta";
 import SquareLoader from "../components/SquareLoader";
 import TextInput from "../components/TextInput";
+import generateChart from "../utils/generatechart";
 import getIntialStats from "../utils/getInitialStats";
 
 export default function Stats() {
   // TODO: set to null
   const [data, setData] = useState(null);
   const [initialStats, setInitialStats] = useState(null);
+  const [chartData, setChartData] = useState(null);
   const fetcher = useFetcher();
 
   const textInput = useRef();
@@ -38,6 +42,7 @@ export default function Stats() {
     const playlistIds = {
       2022: "3NQ42UOhvdXToVPoDkmSRG",
       2021: "02TvflP0z04CtkSTMmY16H",
+      top2021Tristan: "37i9dQZF1EUMDoJuT8yJsl",
     };
     const idOfPlaylistYear = playlistIds[year];
     if (!idOfPlaylistYear) return;
@@ -47,6 +52,19 @@ export default function Stats() {
     // Not sure why, but we cant just submit the form because then the form
     // navigates to the action route.
     submitButtonRef.current.click();
+  }
+
+  // Remove this
+  useEffect(() => {
+    if (textInput?.current && submitButtonRef?.current) {
+      textInput.current.value = "37i9dQZF1EUMDoJuT8yJsl";
+      submitButtonRef.current.click();
+    }
+  }, []);
+
+  function handleChartClick(chartName) {
+    const chartData = generateChart(chartName, data);
+    if (chartData) setChartData(chartData);
   }
 
   return (
@@ -89,6 +107,9 @@ export default function Stats() {
               <Cta onClick={(e) => fillInId(e, 2021)}>Omroep Grunn</Cta>
               <Cta onClick={(e) => fillInId(e, 2022)}>
                 Zweden mixtape vol III
+              </Cta>
+              <Cta onClick={(e) => fillInId(e, "top2021Tristan")}>
+                Tristan top 2021
               </Cta>
             </div>
           </div>
@@ -133,16 +154,13 @@ export default function Stats() {
               </div>
             )}
             {/* Graph options buttons */}
-            <div className="w-full graph-container">
-              <ul>
-                <button
-                  className="underline font-barlow-bold transition-colors hover:text-orange"
-                  onClick={() => console.log("test")}
-                >
-                  Number of songs per artist
-                </button>
-              </ul>
-              <div>GRAPH</div>
+            <div className="flex flex-col w-full graph-container">
+              <ChartOptionsSidebar generateChart={handleChartClick} />
+              {chartData && (
+                <div>
+                  <ChartRenderer {...chartData} />
+                </div>
+              )}
             </div>
           </div>
         )}

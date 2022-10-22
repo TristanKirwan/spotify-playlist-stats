@@ -59,5 +59,7 @@ export const action = async ({ request }) => {
     };
   }
 
-  return data;
+  const filteredData = data.filter((item) => item?.track);
+
+  return filteredData;
 };
