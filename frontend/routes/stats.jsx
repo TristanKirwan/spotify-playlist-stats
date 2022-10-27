@@ -57,7 +57,7 @@ export default function Stats() {
   // Remove this
   useEffect(() => {
     if (textInput?.current && submitButtonRef?.current) {
-      textInput.current.value = "37i9dQZF1EUMDoJuT8yJsl";
+      textInput.current.value = "3NQ42UOhvdXToVPoDkmSRG";
       submitButtonRef.current.click();
     }
   }, []);
@@ -91,7 +91,7 @@ export default function Stats() {
             </label>
             <div>
               {fetcher?.data && fetcher?.data?.error && (
-                <span>
+                <span className="block mb-2">
                   Something went wrong retrieving the playlist data. Please try
                   again later.
                 </span>
@@ -158,7 +158,7 @@ export default function Stats() {
               <ChartOptionsSidebar generateChart={handleChartClick} />
               {chartData && (
                 <div>
-                  <ChartRenderer {...chartData} />
+                  <ChartRenderer options={chartData} />
                 </div>
               )}
             </div>

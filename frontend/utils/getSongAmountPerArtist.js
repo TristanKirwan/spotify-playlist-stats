@@ -27,10 +27,9 @@ export default function getSongAmountPerArtist(data) {
 
   const artistSongObjectAsArray = Object.values(artistSongObject);
   artistSongObjectAsArray.sort((a, b) => {
-    if (a.amountSongs < b.amountSongs) return -1;
+    if (a.amountSongs < b.amountSongs) return 1;
     if (a.amountSongs === b.amountSongs) return 0;
-    return 1;
+    return -1;
   });
-  console.log("artistSongObjectAsArray", artistSongObjectAsArray);
-  return artistSongObjectAsArray;
+  return filteredArray;
 }

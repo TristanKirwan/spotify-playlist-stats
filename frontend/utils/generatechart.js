@@ -1,7 +1,9 @@
+import getPercentagePerLetter from "./getPercentagePerLetter";
 import getSongAmountPerArtist from "./getSongAmountPerArtist";
 
 const chartNameDataMap = {
   numberPerArtist: getSongAmountPerArtist,
+  percentagePerLetter: getPercentagePerLetter,
 };
 
 const chartOptionsMap = {
@@ -19,7 +21,37 @@ const chartOptionsMap = {
       },
     ],
   },
+  percentagePerLetter: {
+    type: "pie",
+    series: [
+      {
+        name: "%",
+      },
+    ],
+    dataLabels: {
+      enabled: true,
+      formatter: function (val, opts) {
+        return `${opts?.w?.config?.labels[opts?.seriesIndex]} - ${Math.round(
+          val
+        )}%`;
+      },
+    },
+    legend: {
+      fontFamily: "barlow-regular, Helvetica, Arial",
+      fontSize: "14px",
+      labels: {
+        colors: ["fff8e1"],
+      },
+    },
+  },
 };
+
+function generateChartOptions(chartName, data) {
+  const options = chartOptionsMap[chartName];
+  options.series = data.map((d) => d?.amountSongs);
+  options.labels = data.map((d) => d?.character);
+  return options;
+}
 
 export default function generateChart(chartName, data) {
   if (
@@ -31,10 +63,7 @@ export default function generateChart(chartName, data) {
     return null;
 
   const chartData = chartNameDataMap[chartName](data);
-  const chartOptions = chartOptionsMap[chartName];
+  const chartOptions = generateChartOptions(chartName, chartData);
 
-  return {
-    data: chartData,
-    options: chartOptions,
-  };
+  return chartOptions;
 }

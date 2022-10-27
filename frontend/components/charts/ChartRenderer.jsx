@@ -1,11 +1,6 @@
-import BarChart from "./BarChart";
+import { ClientOnly } from "remix-utils";
+import Chart from "./Chart.client";
 
-const chartComponents = {
-  bar: BarChart,
-};
-
-export default function ChartRenderer({ data, options }) {
-  if (!options?.type || !chartComponents[options.type]) return;
-  const Comp = chartComponents[options.type];
-  return <Comp data={data} options={options} />;
+export default function ChartRenderer({ options }) {
+  return <ClientOnly>{() => <Chart options={options} />}</ClientOnly>;
 }
