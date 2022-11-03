@@ -23,6 +23,13 @@ export default function ChartOptionsSidebar({ generateChart }) {
               func={generateChart}
             />
           </li>
+          <li>
+            <GenerateChartButton
+              id="songsPerPerson"
+              label="Percentage of playlist added by person"
+              func={generateChart}
+            />
+          </li>
         </ul>
       </li>
     </ul>

@@ -1,55 +1,52 @@
+import PieOptions from "./chartOptions/pie";
 import getPercentagePerLetter from "./getPercentagePerLetter";
 import getSongAmountPerArtist from "./getSongAmountPerArtist";
+import getSongsPerPerson from "./getSongsPerPerson";
 
 const chartNameDataMap = {
   numberPerArtist: getSongAmountPerArtist,
   percentagePerLetter: getPercentagePerLetter,
+  songsPerPerson: getSongsPerPerson,
 };
 
 const chartOptionsMap = {
   numberPerArtist: {
     type: "bar",
-    dataKey: "name",
-    hasXAxis: true,
-    hasYAxis: true,
-    hasLegend: true,
-    hasTooltip: true,
-    values: [
-      {
-        key: "amountSongs",
-        color: "#e57a55",
-      },
-    ],
   },
-  percentagePerLetter: {
-    type: "pie",
-    series: [
-      {
-        name: "%",
-      },
-    ],
-    dataLabels: {
-      enabled: true,
-      formatter: function (val, opts) {
-        return `${opts?.w?.config?.labels[opts?.seriesIndex]} - ${Math.round(
-          val
-        )}%`;
-      },
-    },
-    legend: {
-      fontFamily: "barlow-regular, Helvetica, Arial",
-      fontSize: "14px",
-      labels: {
-        colors: ["fff8e1"],
-      },
-    },
-  },
+  songsPerPerson: PieOptions,
+  percentagePerLetter: PieOptions,
 };
+
+function chartSpecificSeriesMapping(chartName, options, data) {
+  switch (chartName) {
+    case "percentagePerLetter":
+      options.series = data.map((d) => d?.amountSongs);
+      options.labels = data.map((d) => d?.character);
+      return;
+    case "numberPerArtist":
+      const dataToReturn = data.map((dataPoint) => {
+        return {
+          x: dataPoint?.name,
+          y: dataPoint?.amountSongs,
+        };
+      });
+      options.series = [
+        {
+          data: dataToReturn,
+        },
+      ];
+      return;
+    case "songsPerPerson":
+      options.series = data.map((d) => d?.amountSongs);
+      options.labels = data.map((d) => d?.name);
+      return;
+  }
+}
 
 function generateChartOptions(chartName, data) {
   const options = chartOptionsMap[chartName];
-  options.series = data.map((d) => d?.amountSongs);
-  options.labels = data.map((d) => d?.character);
+  chartSpecificSeriesMapping(chartName, options, data);
+
   return options;
 }
 

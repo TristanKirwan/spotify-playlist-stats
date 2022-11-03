@@ -31,5 +31,6 @@ export default function getSongAmountPerArtist(data) {
     if (a.amountSongs === b.amountSongs) return 0;
     return -1;
   });
-  return filteredArray;
+
+  return artistSongObjectAsArray;
 }
