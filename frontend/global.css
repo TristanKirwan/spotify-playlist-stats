@@ -115,6 +115,21 @@ p {
   grid-template-columns: max-content 1fr;
 }
 
+.apexcharts-tooltip {
+  font-family: "barlow-regular", -apple-system, BlinkMacSystemFont, Segoe UI,
+  Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+  sans-serif;
+  font-size: 0.875rem;
+  color: var(--white);
+  background-color: var(--black);
+}
+
+.apexcharts-xaxis-label, .apexcharts-yaxis-label{
+  color: var(--white);
+  fill: var(--white);
+  font-family: "barlow-regular", -apple-system, BlinkMacSystemFont, Segoe UI,
+}
+
 @media only screen and (min-width: 768px) {
   :root {
     /* Font sizes + line heights */

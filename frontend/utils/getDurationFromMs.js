@@ -12,7 +12,6 @@ export default function getDurationFromms(totalDuration) {
     return `${amountFullHours}h ${remainingMinutes}m`;
   }
 
-  //TODO: return correct string and check initial Stats again.
   if (amountMinutes) {
     return `${amountMinutes}m ${remainingSeconds}s`;
   }

@@ -1,9 +1,9 @@
 # Stats to show:
 
-- Number of songs per letter - Bar chart
-- Number of songs per artist - Bar chart
-- Number of songs per person - Pie chart
-- Length of total music per person - Bar chart
+- ~~Number of songs per letter - Pie chart~~
+- ~~Number of songs per artist - Bar chart~~
+- ~~Number of songs per person - Pie chart~~
+- ~~Length of total music per person - Bar chart~~
 - % of length of playlist per person - Pie chart
 - Number of songs per genre (if possible)
 - Length of total songs per letter - Bar chart

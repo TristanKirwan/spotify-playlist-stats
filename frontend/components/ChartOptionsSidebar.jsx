@@ -11,6 +11,13 @@ export default function ChartOptionsSidebar({ generateChart }) {
               func={generateChart}
             />
           </li>
+          <li>
+            <GenerateChartButton
+              id="playlistLengthPerPerson"
+              label="Total playlist length per collaborator"
+              func={generateChart}
+            />
+          </li>
         </ul>
       </li>
       <li>
@@ -26,7 +33,7 @@ export default function ChartOptionsSidebar({ generateChart }) {
           <li>
             <GenerateChartButton
               id="songsPerPerson"
-              label="Percentage of playlist added by person"
+              label="Percentage of playlist per collaborator"
               func={generateChart}
             />
           </li>
@@ -39,7 +46,7 @@ export default function ChartOptionsSidebar({ generateChart }) {
 function GenerateChartButton({ id, label, func }) {
   return (
     <button
-      className="underline font-barlow-bold transition-colors hover:text-orange"
+      className="underline transition-colors font-barlow-bold hover:text-orange"
       onClick={() => func(id)}
     >
       {label}
