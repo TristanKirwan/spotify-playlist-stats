@@ -9,12 +9,14 @@ import percentagePerLetterOptions from './chartOptions/charts/percentagePerLette
 import numberPerArtistOptions from "./chartOptions/charts/numberPerArtis";
 import songsPerPersonOptions from "./chartOptions/charts/songsPerPerson";
 import playlistLengthPerPersonOptions from "./chartOptions/charts/playlistLengthPerPerson";
+import playlistLengthPerPersonPercent from './chartOptions/charts/playlistLengthPerPersonPercent'
 
 const chartNameDataMap = {
   numberPerArtist: getSongAmountPerArtist,
   percentagePerLetter: getPercentagePerLetter,
   songsPerPerson: getSongsPerPerson,
-  playlistLengthPerPerson: getTotalPlaylistLengthPerPerson
+  playlistLengthPerPerson: getTotalPlaylistLengthPerPerson,
+  playlistLengthPerPersonPercent: getTotalPlaylistLengthPerPerson,
 };
 
 const chartOptionsMap = {
@@ -23,7 +25,8 @@ const chartOptionsMap = {
   },
   songsPerPerson: PieOptions,
   percentagePerLetter: PieOptions,
-  playlistLengthPerPerson: BarOptions
+  playlistLengthPerPerson: BarOptions,
+  playlistLengthPerPersonPercent: PieOptions
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -36,6 +39,8 @@ function chartSpecificSeriesMapping(chartName, options, data) {
       return songsPerPersonOptions(options, data);
     case "playlistLengthPerPerson": 
       return playlistLengthPerPersonOptions(options, data);
+    case "playlistLengthPerPersonPercent":
+      return playlistLengthPerPersonPercent(options, data);
     }
 }
 

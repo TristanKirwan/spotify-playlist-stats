@@ -33,7 +33,14 @@ export default function ChartOptionsSidebar({ generateChart }) {
           <li>
             <GenerateChartButton
               id="songsPerPerson"
-              label="Percentage of playlist per collaborator"
+              label="Percentage of playlist per collaborator (song amount)"
+              func={generateChart}
+            />
+          </li>
+          <li>
+            <GenerateChartButton
+              id="playlistLengthPerPersonPercent"
+              label="Percentage of playlist per collaborator (song length)"
               func={generateChart}
             />
           </li>
