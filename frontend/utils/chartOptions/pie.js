@@ -1,4 +1,8 @@
+import defaultOptions from './default';
+
+
 export default {
+  ...defaultOptions,
   type: "pie",
   series: [
     {

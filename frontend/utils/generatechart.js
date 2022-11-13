@@ -4,19 +4,25 @@ import getPercentagePerLetter from "./getPercentagePerLetter";
 import getSongAmountPerArtist from "./getSongAmountPerArtist";
 import getSongsPerPerson from "./getSongsPerPerson";
 import getTotalPlaylistLengthPerPerson from "./getTotalPlaylistLengthPerPerson";
+import getLengthPerLetterPercentage from './getLengthPerLetterPercentage';
 
 import percentagePerLetterOptions from './chartOptions/charts/percentagePerLetter';
 import numberPerArtistOptions from "./chartOptions/charts/numberPerArtis";
 import songsPerPersonOptions from "./chartOptions/charts/songsPerPerson";
 import playlistLengthPerPersonOptions from "./chartOptions/charts/playlistLengthPerPerson";
 import playlistLengthPerPersonPercent from './chartOptions/charts/playlistLengthPerPersonPercent'
+import percentageLengthPerLetter from './chartOptions/charts/percentageLengthPerLetter'
 
 const chartNameDataMap = {
+  //TODO: REMAKE THIS
   numberPerArtist: getSongAmountPerArtist,
+  //TODO: REMAKE THIS
+
   percentagePerLetter: getPercentagePerLetter,
   songsPerPerson: getSongsPerPerson,
   playlistLengthPerPerson: getTotalPlaylistLengthPerPerson,
   playlistLengthPerPersonPercent: getTotalPlaylistLengthPerPerson,
+  lengthPerLetter: getLengthPerLetterPercentage
 };
 
 const chartOptionsMap = {
@@ -26,7 +32,8 @@ const chartOptionsMap = {
   songsPerPerson: PieOptions,
   percentagePerLetter: PieOptions,
   playlistLengthPerPerson: BarOptions,
-  playlistLengthPerPersonPercent: PieOptions
+  playlistLengthPerPersonPercent: PieOptions,
+  lengthPerLetter: PieOptions
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -41,7 +48,9 @@ function chartSpecificSeriesMapping(chartName, options, data) {
       return playlistLengthPerPersonOptions(options, data);
     case "playlistLengthPerPersonPercent":
       return playlistLengthPerPersonPercent(options, data);
-    }
+    case "lengthPerLetter":
+      return percentageLengthPerLetter(options, data);
+  }
 }
 
 function generateChartOptions(chartName, data) {

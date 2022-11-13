@@ -44,6 +44,13 @@ export default function ChartOptionsSidebar({ generateChart }) {
               func={generateChart}
             />
           </li>
+          <li>
+            <GenerateChartButton
+              id="lengthPerLetter"
+              label="Length per first character as %"
+              func={generateChart}
+            />
+          </li>
         </ul>
       </li>
     </ul>

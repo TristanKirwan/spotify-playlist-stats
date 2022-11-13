@@ -5,8 +5,7 @@
 - ~~Number of songs per person - Pie chart~~
 - ~~Length of total music per person - Bar chart~~
 - ~~% of length of playlist per person - Pie chart~~
-- Number of songs per genre (if possible)
-- Length of total songs per letter - Bar chart
+- ~~Length of total songs per letter - Pie chart~~
 - Average song length per letter - Bar chart
 - Ranking of popularity (most spotify plays) - Table?
 - Average # of plays per playlist collaborator - Bar chart
@@ -25,3 +24,7 @@
 
 - Route protection
 - Refresh auth token automatically
+
+# Future ideas if ever possible:
+
+- Number of songs per genre (if possible)

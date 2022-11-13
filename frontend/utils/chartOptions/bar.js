@@ -1,6 +1,7 @@
 import defaultOptions from './default';
 
 export default {
+  ...defaultOptions,
   type: "bar",
   plotOptions: {
     bar: {
@@ -24,5 +25,4 @@ export default {
       colors: ["fff8e1"],
     },
   },
-  ...defaultOptions
 };

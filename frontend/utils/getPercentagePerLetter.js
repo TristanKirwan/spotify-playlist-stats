@@ -29,12 +29,12 @@ export default function getPercentagePerLetter(data) {
         characterSongObject[firstCharacterOfTrack].amountSongs;
       characterSongObject[firstCharacterOfTrack].amountSongs =
         originalAmount + 1;
-      characterSongObject[firstCharacterOfTrack].songs.push(item?.track?.name);
+      characterSongObject[firstCharacterOfTrack].songs.push(item?.track);
     } else {
       characterSongObject[firstCharacterOfTrack] = {
         character: firstCharacterOfTrack,
         amountSongs: 1,
-        songs: [originalTrackName],
+        songs: [item?.track],
       };
     }
   }
