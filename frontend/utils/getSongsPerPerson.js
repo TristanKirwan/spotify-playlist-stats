@@ -15,10 +15,12 @@ export default function getSongsPerPerson(data) {
         name: userId,
         url: userUri,
         amountSongs: 1,
+        songs: [item]
       };
     } else {
       const newAmountSongs = personSongObject[userId].amountSongs + 1;
       personSongObject[userId].amountSongs = newAmountSongs;
+      personSongObject[userId].songs.push(item);
     }
   }
 

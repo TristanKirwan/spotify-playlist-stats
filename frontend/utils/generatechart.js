@@ -5,7 +5,7 @@ import getSongsPerPerson from "./getSongsPerPerson";
 import getTotalPlaylistLengthPerPerson from "./getTotalPlaylistLengthPerPerson";
 import getLengthPerLetterPercentage from './getLengthPerLetterPercentage';
 import getAverageLengthPerLetter from './getAverageLengthPerLetter';
-
+import getAveragePopularityPerPerson from './getAveragePopularityPerPerson'
 
 // General options
 import PieOptions from "./chartOptions/pie";
@@ -19,6 +19,7 @@ import playlistLengthPerPersonOptions from "./chartOptions/charts/playlistLength
 import playlistLengthPerPersonPercentOptions from './chartOptions/charts/playlistLengthPerPersonPercent'
 import percentageLengthPerLetterOptions from './chartOptions/charts/percentageLengthPerLetter'
 import averageLengthPerLetterOptions from './chartOptions/charts/averageLengthPerLetter';
+import averagePopularityPerPersonOptions from './chartOptions/charts/averagePopularityPerPerson';
 
 const chartNameDataMap = {
   //TODO: REMAKE THIS
@@ -30,7 +31,8 @@ const chartNameDataMap = {
   playlistLengthPerPerson: getTotalPlaylistLengthPerPerson,
   playlistLengthPerPersonPercent: getTotalPlaylistLengthPerPerson,
   lengthPerLetter: getLengthPerLetterPercentage,
-  avgLengthPerLetter: getAverageLengthPerLetter
+  avgLengthPerLetter: getAverageLengthPerLetter,
+  avgPopularityPerPerson: getAveragePopularityPerPerson
 };
 
 const chartOptionsMap = {
@@ -42,7 +44,8 @@ const chartOptionsMap = {
   playlistLengthPerPerson: BarOptions,
   playlistLengthPerPersonPercent: PieOptions,
   lengthPerLetter: PieOptions,
-  avgLengthPerLetter: BarOptions
+  avgLengthPerLetter: BarOptions,
+  avgPopularityPerPerson: BarOptions
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -61,6 +64,8 @@ function chartSpecificSeriesMapping(chartName, options, data) {
       return percentageLengthPerLetterOptions(options, data);
     case "avgLengthPerLetter": 
       return averageLengthPerLetterOptions(options, data)
+    case "avgPopularityPerPerson":
+      return averagePopularityPerPersonOptions(options, data)
   }
 }
 

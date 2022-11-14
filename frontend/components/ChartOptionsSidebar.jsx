@@ -25,6 +25,13 @@ export default function ChartOptionsSidebar({ generateChart }) {
               func={generateChart}
             />
           </li>
+          <li>
+            <GenerateChartButton
+              id="avgPopularityPerPerson"
+              label="Average song popularity per person (based on spotify's popularity index)"
+              func={generateChart}
+            />
+          </li>
         </ul>
       </li>
       <li>

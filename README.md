@@ -8,7 +8,7 @@
 - ~~Length of total songs per letter - Pie chart~~
 - ~~Average song length per letter - Bar chart~~
 - Ranking of popularity (most spotify plays) - Table?
-- Average # of plays per playlist collaborator - Bar chart
+- ~~Average # of plays per playlist collaborator - Bar chart~~
 - Longest song per letter - No chart
 - Shortest song per letter - No chart
 - Per playlist collaborator max # of songs of a single artist
@@ -30,4 +30,4 @@
 
 # Future ideas if ever possible:
 
-- Number of songs per genre (if possible)
+- Number of songs per genre (if possible) -> Could be solved with track audio features (energetic danceability etc)
