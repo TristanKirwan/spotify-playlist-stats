@@ -18,6 +18,13 @@ export default function ChartOptionsSidebar({ generateChart }) {
               func={generateChart}
             />
           </li>
+          <li>
+            <GenerateChartButton
+              id="avgLengthPerLetter"
+              label="Average song length per letter"
+              func={generateChart}
+            />
+          </li>
         </ul>
       </li>
       <li>

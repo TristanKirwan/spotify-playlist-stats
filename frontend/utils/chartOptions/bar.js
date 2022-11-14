@@ -25,4 +25,10 @@ export default {
       colors: ["fff8e1"],
     },
   },
+  tooltip: {
+    marker: {
+      show: false
+    },
+    ...defaultOptions?.tooltip
+  }
 };

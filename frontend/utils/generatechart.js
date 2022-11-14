@@ -1,17 +1,24 @@
-import PieOptions from "./chartOptions/pie";
-import BarOptions from './chartOptions/bar';
+// Data mapping functions
 import getPercentagePerLetter from "./getPercentagePerLetter";
 import getSongAmountPerArtist from "./getSongAmountPerArtist";
 import getSongsPerPerson from "./getSongsPerPerson";
 import getTotalPlaylistLengthPerPerson from "./getTotalPlaylistLengthPerPerson";
 import getLengthPerLetterPercentage from './getLengthPerLetterPercentage';
+import getAverageLengthPerLetter from './getAverageLengthPerLetter';
 
+
+// General options
+import PieOptions from "./chartOptions/pie";
+import BarOptions from './chartOptions/bar';
+
+// Option functions
 import percentagePerLetterOptions from './chartOptions/charts/percentagePerLetter';
 import numberPerArtistOptions from "./chartOptions/charts/numberPerArtis";
 import songsPerPersonOptions from "./chartOptions/charts/songsPerPerson";
 import playlistLengthPerPersonOptions from "./chartOptions/charts/playlistLengthPerPerson";
-import playlistLengthPerPersonPercent from './chartOptions/charts/playlistLengthPerPersonPercent'
-import percentageLengthPerLetter from './chartOptions/charts/percentageLengthPerLetter'
+import playlistLengthPerPersonPercentOptions from './chartOptions/charts/playlistLengthPerPersonPercent'
+import percentageLengthPerLetterOptions from './chartOptions/charts/percentageLengthPerLetter'
+import averageLengthPerLetterOptions from './chartOptions/charts/averageLengthPerLetter';
 
 const chartNameDataMap = {
   //TODO: REMAKE THIS
@@ -22,7 +29,8 @@ const chartNameDataMap = {
   songsPerPerson: getSongsPerPerson,
   playlistLengthPerPerson: getTotalPlaylistLengthPerPerson,
   playlistLengthPerPersonPercent: getTotalPlaylistLengthPerPerson,
-  lengthPerLetter: getLengthPerLetterPercentage
+  lengthPerLetter: getLengthPerLetterPercentage,
+  avgLengthPerLetter: getAverageLengthPerLetter
 };
 
 const chartOptionsMap = {
@@ -33,7 +41,8 @@ const chartOptionsMap = {
   percentagePerLetter: PieOptions,
   playlistLengthPerPerson: BarOptions,
   playlistLengthPerPersonPercent: PieOptions,
-  lengthPerLetter: PieOptions
+  lengthPerLetter: PieOptions,
+  avgLengthPerLetter: BarOptions
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -47,9 +56,11 @@ function chartSpecificSeriesMapping(chartName, options, data) {
     case "playlistLengthPerPerson": 
       return playlistLengthPerPersonOptions(options, data);
     case "playlistLengthPerPersonPercent":
-      return playlistLengthPerPersonPercent(options, data);
+      return playlistLengthPerPersonPercentOptions(options, data);
     case "lengthPerLetter":
-      return percentageLengthPerLetter(options, data);
+      return percentageLengthPerLetterOptions(options, data);
+    case "avgLengthPerLetter": 
+      return averageLengthPerLetterOptions(options, data)
   }
 }
 
