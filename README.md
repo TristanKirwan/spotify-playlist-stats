@@ -26,6 +26,7 @@
 - Refresh auth token automatically
 - Revamp UI
 - changing charts bug
+- Replacing user ID functionality
 
 # Future ideas if ever possible:
 
