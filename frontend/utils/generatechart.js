@@ -7,10 +7,12 @@ import getLengthPerLetterPercentage from './getLengthPerLetterPercentage';
 import getAverageLengthPerLetter from './getAverageLengthPerLetter';
 import getAveragePopularityPerPerson from './getAveragePopularityPerPerson'
 import getMaxArtistPerPerson from './getMaxArtistPerPerson';
+import getLongestAndShortesSongPerLetter from './getLongestAndShortesSongPerLetter'
 
 // General options
 import PieOptions from "./chartOptions/pie";
 import BarOptions from './chartOptions/bar';
+import TableOptions from './chartOptions/table';
 
 // Option functions
 import percentagePerLetterOptions from './chartOptions/charts/percentagePerLetter';
@@ -22,6 +24,7 @@ import percentageLengthPerLetterOptions from './chartOptions/charts/percentageLe
 import averageLengthPerLetterOptions from './chartOptions/charts/averageLengthPerLetter';
 import averagePopularityPerPersonOptions from './chartOptions/charts/averagePopularityPerPerson';
 import maxOfArtistPerPersonOptions from './chartOptions/charts/maxOfArtistPerPerson';
+import longestShortestSongPerLetterOptions from './chartOptions/charts/longestShortestSongPerLetter'
 
 const chartNameDataMap = {
   numberPerArtist: getSongAmountPerArtist,
@@ -32,7 +35,8 @@ const chartNameDataMap = {
   lengthPerLetter: getLengthPerLetterPercentage,
   avgLengthPerLetter: getAverageLengthPerLetter,
   avgPopularityPerPerson: getAveragePopularityPerPerson,
-  maxOfArtistPerPerson: getMaxArtistPerPerson
+  maxOfArtistPerPerson: getMaxArtistPerPerson,
+  longestShortestSongPerLetter: getLongestAndShortesSongPerLetter
 };
 
 const chartOptionsMap = {
@@ -44,7 +48,8 @@ const chartOptionsMap = {
   lengthPerLetter: PieOptions,
   avgLengthPerLetter: BarOptions,
   avgPopularityPerPerson: BarOptions,
-  maxOfArtistPerPerson: BarOptions
+  maxOfArtistPerPerson: BarOptions,
+  longestShortestSongPerLetter: TableOptions
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -67,6 +72,8 @@ function chartSpecificSeriesMapping(chartName, options, data) {
       return averagePopularityPerPersonOptions(options, data)
     case "maxOfArtistPerPerson":
       return maxOfArtistPerPersonOptions(options, data)
+    case "longestShortestSongPerLetter":
+      return longestShortestSongPerLetterOptions(options, data)
   }
 }
 

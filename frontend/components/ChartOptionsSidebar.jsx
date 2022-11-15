@@ -74,6 +74,18 @@ export default function ChartOptionsSidebar({ generateChart }) {
           </li>
         </ul>
       </li>
+      <li>
+        <span>📋Tables</span>
+        <ul>
+          <li>
+            <GenerateChartButton
+              id="longestShortestSongPerLetter"
+              label="Longest and shortest song per letter"
+              func={generateChart}
+            />
+          </li>
+        </ul>
+      </li>
     </ul>
   );
 }
