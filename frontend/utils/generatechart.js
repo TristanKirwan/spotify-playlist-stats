@@ -6,6 +6,7 @@ import getTotalPlaylistLengthPerPerson from "./getTotalPlaylistLengthPerPerson";
 import getLengthPerLetterPercentage from './getLengthPerLetterPercentage';
 import getAverageLengthPerLetter from './getAverageLengthPerLetter';
 import getAveragePopularityPerPerson from './getAveragePopularityPerPerson'
+import getMaxArtistPerPerson from './getMaxArtistPerPerson';
 
 // General options
 import PieOptions from "./chartOptions/pie";
@@ -20,12 +21,10 @@ import playlistLengthPerPersonPercentOptions from './chartOptions/charts/playlis
 import percentageLengthPerLetterOptions from './chartOptions/charts/percentageLengthPerLetter'
 import averageLengthPerLetterOptions from './chartOptions/charts/averageLengthPerLetter';
 import averagePopularityPerPersonOptions from './chartOptions/charts/averagePopularityPerPerson';
+import maxOfArtistPerPersonOptions from './chartOptions/charts/maxOfArtistPerPerson';
 
 const chartNameDataMap = {
-  //TODO: REMAKE THIS
   numberPerArtist: getSongAmountPerArtist,
-  //TODO: REMAKE THIS
-
   percentagePerLetter: getPercentagePerLetter,
   songsPerPerson: getSongsPerPerson,
   playlistLengthPerPerson: getTotalPlaylistLengthPerPerson,
@@ -33,6 +32,7 @@ const chartNameDataMap = {
   lengthPerLetter: getLengthPerLetterPercentage,
   avgLengthPerLetter: getAverageLengthPerLetter,
   avgPopularityPerPerson: getAveragePopularityPerPerson,
+  maxOfArtistPerPerson: getMaxArtistPerPerson
 };
 
 const chartOptionsMap = {
@@ -43,7 +43,8 @@ const chartOptionsMap = {
   playlistLengthPerPersonPercent: PieOptions,
   lengthPerLetter: PieOptions,
   avgLengthPerLetter: BarOptions,
-  avgPopularityPerPerson: BarOptions
+  avgPopularityPerPerson: BarOptions,
+  maxOfArtistPerPerson: BarOptions
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -64,6 +65,8 @@ function chartSpecificSeriesMapping(chartName, options, data) {
       return averageLengthPerLetterOptions(options, data)
     case "avgPopularityPerPerson":
       return averagePopularityPerPersonOptions(options, data)
+    case "maxOfArtistPerPerson":
+      return maxOfArtistPerPersonOptions(options, data)
   }
 }
 

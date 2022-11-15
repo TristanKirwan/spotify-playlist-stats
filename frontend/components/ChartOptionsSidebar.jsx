@@ -32,6 +32,13 @@ export default function ChartOptionsSidebar({ generateChart }) {
               func={generateChart}
             />
           </li>
+          <li>
+            <GenerateChartButton
+              id="maxOfArtistPerPerson"
+              label="Highest # of songs of 1 artist"
+              func={generateChart}
+            />
+          </li>
         </ul>
       </li>
       <li>

@@ -7,11 +7,11 @@
 - ~~% of length of playlist per person - Pie chart~~
 - ~~Length of total songs per letter - Pie chart~~
 - ~~Average song length per letter - Bar chart~~
-- Ranking of popularity (most spotify plays) - Table?
+- ~~Ranking of popularity (most spotify plays) - Table?~~
 - ~~Average # of plays per playlist collaborator - Bar chart~~
 - Longest song per letter - No chart
 - Shortest song per letter - No chart
-- Per playlist collaborator max # of songs of a single artist
+- ~~Per playlist collaborator max # of songs of a single artist~~
 
 1 off stats:
 
