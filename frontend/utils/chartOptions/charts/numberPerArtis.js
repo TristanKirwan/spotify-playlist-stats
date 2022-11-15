@@ -1,8 +1,9 @@
 export default function numberPerArtist(options, data){
-  const dataToReturn = data.map((dataPoint) => {
+  const test = data.slice(0, 100)
+  const dataToReturn = test.map((d) => {
     return {
-      x: dataPoint?.name,
-      y: dataPoint?.amountSongs,
+      x: d?.name,
+      y: d?.amountSongs,
     };
   });
   options.series = [
@@ -10,5 +11,7 @@ export default function numberPerArtist(options, data){
       data: dataToReturn,
     },
   ];
+
+  options.dataLabels.enabled = false;
   return;
 }

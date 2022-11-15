@@ -7,7 +7,7 @@ export default function ChartOptionsSidebar({ generateChart }) {
           <li>
             <GenerateChartButton
               id="numberPerArtist"
-              label="Number of songs per artist"
+              label="Number of songs per artist (min 2.)"
               func={generateChart}
             />
           </li>

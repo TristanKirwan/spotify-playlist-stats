@@ -1,4 +1,9 @@
 export default {
+  chart: {
+    toolbar: {
+      show: false
+    },
+  },
   dataLabels: {
     enabled: true,
   },

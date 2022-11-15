@@ -31,5 +31,7 @@ export default function getSongsPerPerson(data) {
     return -1;
   });
 
-  return personSongObjectAsArray;
+  const filteredArray = personSongObjectAsArray.filter((item) => item.amountSongs > 1)
+
+  return filteredArray;
 }

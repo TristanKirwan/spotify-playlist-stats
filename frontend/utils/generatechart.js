@@ -32,13 +32,11 @@ const chartNameDataMap = {
   playlistLengthPerPersonPercent: getTotalPlaylistLengthPerPerson,
   lengthPerLetter: getLengthPerLetterPercentage,
   avgLengthPerLetter: getAverageLengthPerLetter,
-  avgPopularityPerPerson: getAveragePopularityPerPerson
+  avgPopularityPerPerson: getAveragePopularityPerPerson,
 };
 
 const chartOptionsMap = {
-  numberPerArtist: {
-    type: "bar",
-  },
+  numberPerArtist: BarOptions,
   songsPerPerson: PieOptions,
   percentagePerLetter: PieOptions,
   playlistLengthPerPerson: BarOptions,
