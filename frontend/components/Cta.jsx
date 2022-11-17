@@ -4,7 +4,6 @@ export default function Cta({
   isLink = false,
   href = "/",
   children,
-  smallerText = true,
   onClick = null,
   passedRef = null,
   className
@@ -14,8 +13,7 @@ export default function Cta({
       <a
         href={href}
         className={clsx(
-          "border inline-block rounded border-secondary bg-secondary px-2 py-0.5 font-barlow-semibold text-background transition-all hover:bg-secondary/80 hover:border-secondary/80 lg:px-6",
-          smallerText ? "text-body-4" : "text-body-3",
+          "border inline-block rounded border-secondary bg-secondary px-2 py-0.5 font-barlow-semibold text-background transition-all hover:bg-secondary/80 hover:border-secondary/80 lg:px-6 text-body-3",
           className
         )}
         ref={passedRef}
@@ -28,8 +26,7 @@ export default function Cta({
   return (
     <button
       className={clsx(
-        "border inline-block rounded border-secondary bg-secondary px-2 py-0.5 font-barlow-semibold text-background transition-all hover:bg-secondary/80 hover:border-secondary/80 lg:px-6",
-        smallerText ? "text-body-4" : "text-body-3",
+        "border inline-block rounded border-secondary bg-secondary px-2 py-0.5 font-barlow-semibold text-background transition-all hover:bg-secondary/80 hover:border-secondary/80 lg:px-6 text-body-3",
         className
       )}
       onClick={onClick}

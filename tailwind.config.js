@@ -49,6 +49,10 @@ module.exports = {
       width: {
         sidebar: "var(--sidebar-width)",
       },
+      maxWidth: {
+        tiny: '11.25rem',
+        xxs: '15rem'
+      }
     },
   },
   plugins: [],
