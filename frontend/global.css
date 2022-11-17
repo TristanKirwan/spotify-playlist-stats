@@ -27,31 +27,22 @@
 }
 
 :root {
-  /* Regular colors (for custom utility classes or global styling) */
-  --orange: #e57a55;
-  --white: rgba(255, 248, 225, 1);
-  --white-12: rgba(255, 248, 225, 0.12);
-  --dark-green: #082a35;
-  --black: #00161d;
 
+  --background: #F1F1F1;
+  --text: #00161d;
+  --primary: #3A6EA5;
+  --secondary: #7A8450;
+  --tertiary: #88292F;
+  
   /* Chart colors */
   --chart-orange: #e57945;
   --chart-blue: #75c8b9;
   --chart-yellow: #e4b827;
   --chart-background: #0e313b;
 
-  /* Font sizes + line heights */
-  /* Outline numbers */
-  --chapter-title-number: 7rem;
-  --chapter-title-number-line-height: 1;
-  --subchapter-title-number: 7rem;
-  --subchapter-title-number-line-height: 8.375rem;
-  --hero-stat-number: 4.375rem;
-  --hero-stat-number-line-height: 5.25rem;
-
   /* Headings */
-  --heading-1: 2.1875rem;
-  --heading-1-line-height: 2.875rem;
+  --heading-1: 4rem;
+  --heading-1-line-height: 1;
   --heading-2: 2rem;
   --heading-2-line-height: 2.625rem;
   --heading-3: 1.625rem;
@@ -77,10 +68,6 @@
   --button-text-2: 0.875rem;
   --button-text-2-line-height: 1.6875rem;
 
-  /* Sizes of components that are important to page layout */
-  --sidebar-width: 5rem;
-  --sidebar-right-whitespace: 2rem;
-  --content-size: 40.625rem;
 }
 
 html,
@@ -95,8 +82,11 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--dark-green);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--black);
+  background-color: #f1f1f1;
+  background-image: url("/images/backgroundTexture.svg");
+
 }
 
 p {
@@ -132,15 +122,6 @@ p {
 
 @media only screen and (min-width: 768px) {
   :root {
-    /* Font sizes + line heights */
-    /* Outline numbers */
-    --chapter-title-number: 14.375rem;
-    --chapter-title-number-line-height: 1;
-    --subchapter-title-number: 10.125rem;
-    --subchapter-title-number-line-height: 8.875rem;
-    --hero-stat-number: 6.25rem;
-    --hero-stat-number-line-height: 7.5rem;
-
     /* Headings */
     --heading-1: 5.75rem;
     --heading-1-line-height: 6.25rem;
@@ -166,5 +147,20 @@ p {
   .stats-page-wrapper {
     grid-template-columns: 30% 1fr;
     grid-template-rows: 1fr;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .homecontainer {
+    grid-template-columns: 50% 1fr;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  :root {
+    --heading-1: 8rem;
+  } 
+  .homecontainer {
+    grid-template-columns: 60% 1fr;
   }
 }

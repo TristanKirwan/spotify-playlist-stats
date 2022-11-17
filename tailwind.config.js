@@ -3,22 +3,11 @@ module.exports = {
   darkMode: "class",
   theme: {
     colors: {
-      orange: "#e57a55",
-      "orange-2": "#ce6e4d",
-      "orange-3": "#b76244",
-      "orange-4": "#a0553b",
-
-      black: "#00161d",
-      "dark-blue": "#07242e",
-      "dark-green": "#082a35",
-      white: "#fff8e1",
-      "light-blue": "#99dbcf",
-      "neutral-blue": "#3e8780",
-      green: "#0e313b",
-      "true-white": "#FFFFFF",
-      "gradient-dark-green": "#0D3039",
-      "gradient-light-green": "#8FD7CA",
-      transparent: "transparent",
+      text: "#00161d",
+      background: "#F1F1F1",
+      primary: '#3A6EA5',
+      secondary: '#7A8450',
+      tertiary: '#88292F'
     },
     fontFamily: {
       "barlow-bold": ["barlow-bold"],

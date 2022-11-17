@@ -3,7 +3,7 @@ import clsx from "clsx";
 export default function Container({ children, containerClass }) {
   return (
     <div
-      className={clsx("px-5 max-w-[760px] xl:max-w-[1120px]", containerClass)}
+      className={clsx("px-5 mx-auto max-w-[1280px] md:px-8", containerClass)}
     >
       {children}
     </div>
