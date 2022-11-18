@@ -14,7 +14,7 @@ export default function TextInput({
       required={required}
       placeholder={placeholder}
       className={clsx(
-        "px-4 py-2 text-white font-barlow-semibold bg-green placeholder:text-white/80",
+        "bg-transparent border-b-2 border-secondary/60 transition-colors outline-0 focus:border-secondary",
         className && className
       )}
       ref={passedRef}

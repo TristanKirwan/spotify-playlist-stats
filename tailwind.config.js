@@ -5,9 +5,10 @@ module.exports = {
     colors: {
       text: "#00161d",
       background: "#F1F1F1",
-      primary: '#3A6EA5',
-      secondary: '#7A8450',
-      tertiary: '#88292F'
+      primary: "#3A6EA5",
+      secondary: "#7A8450",
+      tertiary: "#88292F",
+      transparent: "transparent",
     },
     fontFamily: {
       "barlow-bold": ["barlow-bold"],
@@ -50,9 +51,13 @@ module.exports = {
         sidebar: "var(--sidebar-width)",
       },
       maxWidth: {
-        tiny: '11.25rem',
-        xxs: '15rem'
-      }
+        tiny: "11.25rem",
+        xxs: "15rem",
+      },
+      minWidth: {
+        xs: "18.75rem",
+        sm: "24rem",
+      },
     },
   },
   plugins: [],
