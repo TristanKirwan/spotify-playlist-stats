@@ -10,6 +10,8 @@ export default function Popup({ isOpen, closeCallback, allowScrolling, children 
   const backgroundRef = useRef(null);
   const popupRef = useRef(null)
 
+  const wasOpenBefore = useRef(false)
+
   useEffect(() => {
     toggleBodyScrolling();
   }, []);
@@ -18,6 +20,7 @@ export default function Popup({ isOpen, closeCallback, allowScrolling, children 
     if(!wrapperRef?.current || !backgroundRef?.current || !popupRef?.current) return;
 
     if(isOpen){
+      wasOpenBefore.current = true
       anime.timeline({
         easing: 'easeOutCubic',
         duration: 800,
@@ -37,7 +40,7 @@ export default function Popup({ isOpen, closeCallback, allowScrolling, children 
         translateY: ['-2vh', '0rem']
       }, "-=400")
     } 
-    else if(!isOpen) {
+    else if(!isOpen && wasOpenBefore.current) {
       anime.timeline({
         easing: 'easeOutCubic',
         duration: 800,
@@ -63,7 +66,7 @@ export default function Popup({ isOpen, closeCallback, allowScrolling, children 
   return (
     <div
       className={clsx(
-        "fixed top-0 left-0 flex items-center justify-center w-full h-screen p-8",
+        "fixed top-0 left-0 flex items-center justify-center w-full h-screen p-8 z-20",
         !isOpen && "pointer-events-none"
       )}
       ref={wrapperRef}

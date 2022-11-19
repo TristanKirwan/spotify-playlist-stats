@@ -15,7 +15,7 @@ export default function HomeHero({authLink}) {
   useEffect(() => {
     if(!introText?.current || !headingTextRef?.current || !welcomeText?.current || !ctaButtonRef?.current || !illustrationContainerRef?.current) return;
 
-    const splitHeadingText = new SplitType(headingTextRef.current, { types: 'charts'});
+    const splitHeadingText = new SplitType(headingTextRef.current, { types: 'chars'});
     const splitWelcomeText = new SplitType (welcomeText.current, { types: 'words'})
 
     anime.timeline({
