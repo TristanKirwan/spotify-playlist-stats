@@ -54,6 +54,9 @@ module.exports = {
         tiny: "11.25rem",
         xxs: "15rem",
       },
+      transitionDuration: {
+        DEFAULT: '300ms'
+      },
       minWidth: {
         xs: "18.75rem",
         sm: "24rem",

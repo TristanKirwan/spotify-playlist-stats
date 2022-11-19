@@ -32,7 +32,7 @@ export default function StatsPage(){
             <p className="max-w-sm leading-tight text-center text-body-2 md:max-w-xl">
               But sometimes, they can use a little direction. <br /> Get started by selecting a playlist.
             </p>
-            <Cta onClick={() => setShowPopup(true)}>
+            <Cta onClick={() => {console.log('?'); setShowPopup(true)}}>
               Select Playlist  
             </Cta>  
           </div>
