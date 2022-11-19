@@ -1,4 +1,3 @@
-import { useFetcher } from "@remix-run/react";
 import clsx from "clsx";
 import { useRef, useEffect } from "react";
 import CTA from "./Cta";
@@ -6,8 +5,7 @@ import Popup from "./Popup";
 import TextInput from "./TextInput";
 import CircleLoader from './CircleLoader';
 
-export default function PlaylistPopup({ isOpen, closeCallBack }) {
-  const fetcher = useFetcher();
+export default function PlaylistPopup({ isOpen, closeCallBack, fetcher }) {
   const textInputRef = useRef(null);
 
   // Needed to prevent automatic closing after retrieving data once.
