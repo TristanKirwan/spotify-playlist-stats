@@ -64,7 +64,7 @@ export default function StatsPage() {
   },[])
 
   useEffect(() => {
-    if(!Array.isArray(data) && Array.isArray(fetcher.data) && introTitleRef?.current && introTextRef?.current && openPopupButtonRef?.current && introIllustrationRef?.current) {
+    if(!Array.isArray(data) && Array.isArray(fetcher.data?.tracks) && introTitleRef?.current && introTextRef?.current && openPopupButtonRef?.current && introIllustrationRef?.current) {
       const splitIntroTitle = new SplitType(introTitleRef.current, { types: 'words'})
       // Do animation and change the data state of this component.
       const tl = anime.timeline({
@@ -73,8 +73,7 @@ export default function StatsPage() {
         autoplay: false,
         complete: function(){ 
           setData(fetcher.data)
-          console.log('fetcher.data', fetcher.data);
-          const initialStats = getInitialStats(fetcher.data)
+          const initialStats = getInitialStats(fetcher.data.tracks)
           setInitialPlaylistStats(initialStats)
         }
       })
@@ -125,8 +124,8 @@ export default function StatsPage() {
   return <div className="py-12">
     <PlaylistPopup isOpen={showPopup} closeCallBack={() => setShowPopup(false)} fetcher={fetcher}/>
     <div>
-      {Array.isArray(data) ? <div>
-        <PlaylistIntro initialStats={initialPlaylistStats} />
+      {data?.tracks ? <div>
+        <PlaylistIntro initialStats={initialPlaylistStats} playlistName={data.name}/>
       </div> :
       <Container>
         <div className="flex flex-col items-center gap-12 md:flex-row md:items-start md:justify-center">

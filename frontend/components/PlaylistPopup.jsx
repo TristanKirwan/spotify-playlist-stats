@@ -13,7 +13,7 @@ export default function PlaylistPopup({ isOpen, closeCallBack, fetcher }) {
 
   useEffect(() => {
     // Data was found.
-    if(Array.isArray(fetcher?.data) && !fetcher?.data?.error && !hasReceivedData.current) {
+    if(Array.isArray(fetcher?.data?.tracks) && !fetcher?.data?.error && !hasReceivedData.current) {
       closeCallBack();
       hasReceivedData.current = true;
     }

@@ -8,7 +8,6 @@ export const loader = async ({ request }) => {
     request
   );
   if (accessToken && refreshToken && authExpiresIn) {
-    console.log("accessToken, authExpiresIn", accessToken, authExpiresIn);
     return redirect("/stats", {
       headers: {
         // TODO: fix refresh token here
