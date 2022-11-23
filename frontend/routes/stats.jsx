@@ -1,92 +1,115 @@
-import { useFetcher } from "@remix-run/react";
+import anime from "animejs";
 import { useEffect, useRef, useState } from "react";
-import ChartOptionsSidebar from "../components/ChartOptionsSidebar";
-import ChartRenderer from "../components/charts/ChartRenderer";
+import SplitType from "split-type";
+import Container from "../components/Container";
 import Cta from "../components/Cta";
-import SquareLoader from "../components/SquareLoader";
-import TextInput from "../components/TextInput";
-import generateChart from "../utils/generatechart";
-import getIntialStats from "../utils/getInitialStats";
-import anime from 'animejs'
-import SplitType from 'split-type';
-
-import Container from '../components/Container'
-import NoDataIllustration from '../components/NoDataIllustration';
+import NoDataIllustration from "../components/NoDataIllustration";
 import PlaylistPopup from "../components/PlaylistPopup";
 
-
-export default function StatsPage(){
+export default function StatsPage() {
   const [data, setData] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
   const introTitleRef = useRef(null);
   const introTextRef = useRef(null);
   const openPopupButtonRef = useRef(null);
-  const introIllustrationRef = useRef(null)
+  const introIllustrationRef = useRef(null);
 
   useEffect(() => {
-    if(!introTitleRef?.current || !introTextRef?.current || !openPopupButtonRef?.current || !introIllustrationRef?.current) return;
+    if (
+      !introTitleRef?.current ||
+      !introTextRef?.current ||
+      !openPopupButtonRef?.current ||
+      !introIllustrationRef?.current
+    )
+      return;
 
-    const splitIntroTitle = new SplitType(introTitleRef.current, { types: 'words'})
-    anime.timeline({
-      easing: 'easeOutCubic',
-      duration: 800,
-    })
-    .add({
-      targets: introIllustrationRef.current,
-      opacity: [0, 1],
-      translateX: ['4rem', '0']
-    })
-    .add({
-      targets: introTitleRef.current,
-      opacity: [0, 1],
-      duration: 0
-    })
-    .add({
-      targets: splitIntroTitle?.words,
-      opacity: [0, 1],
-      translateY: ['-4rem', '0'],
-      delay: anime.stagger(50),
-    })
-    .add({
-      targets: introTextRef.current,
-      opacity: [0, 1],
-      translateX: ['-1.5rem', '0'],
-    }, "-=600")
-    .add({
-      targets: openPopupButtonRef.current,
-      opacity: [0, 1],
-      duration: 200,
-    })
-  },[])
-  
-  return <div className="py-12">
-    <PlaylistPopup isOpen={showPopup} closeCallBack={() => setShowPopup(false)}/>
-    <div>
-      {Array.isArray(data) ? <div>
+    const splitIntroTitle = new SplitType(introTitleRef.current, {
+      types: "words",
+    });
+    anime
+      .timeline({
+        easing: "easeOutCubic",
+        duration: 800,
+      })
+      .add({
+        targets: introIllustrationRef.current,
+        opacity: [0, 1],
+        translateX: ["4rem", "0"],
+      })
+      .add({
+        targets: introTitleRef.current,
+        opacity: [0, 1],
+        duration: 0,
+      })
+      .add({
+        targets: splitIntroTitle?.words,
+        opacity: [0, 1],
+        translateY: ["-4rem", "0"],
+        rotate: ["-5deg", "0deg"],
+        delay: anime.stagger(50),
+      })
+      .add(
+        {
+          targets: introTextRef.current,
+          opacity: [0, 1],
+          translateX: ["-1.5rem", "0"],
+        },
+        "-=600"
+      )
+      .add({
+        targets: openPopupButtonRef.current,
+        opacity: [0, 1],
+        duration: 200,
+      });
+  }, []);
 
-      </div> :
-      <Container>
-        <div className="flex flex-col items-center gap-12 md:flex-row md:items-start md:justify-center">
-          <div className="flex flex-col items-center gap-4">
-            <span className="max-w-sm overflow-hidden text-center opacity-0 font-barlow-bold text-heading-3 md:max-w-none" ref={introTitleRef}>
-              A wanderer is not always lost.
-            </span>
-            <p className="max-w-sm overflow-hidden leading-tight text-center opacity-0 text-body-2 md:max-w-xl" ref={introTextRef}>
-              But sometimes, they can use a little direction. <br /> Get started by selecting a playlist.
-            </p>
-            <Cta onClick={() => setShowPopup(true)} passedRef={openPopupButtonRef} className="opacity-0">
-              Select Playlist  
-            </Cta>  
-          </div>
-          <div className="w-4/12 max-w-xs opacity-0 md:max-w-tiny xl:max-w-xxs" ref={introIllustrationRef}>
-            <NoDataIllustration />
-          </div>
-        </div> 
-      </Container>
-      }
+  return (
+    <div className="py-12 lg:min-h-screen lg:flex lg:items-center lg:justify-center">
+      <PlaylistPopup
+        isOpen={showPopup}
+        closeCallBack={() => setShowPopup(false)}
+      />
+      <div className="w-full">
+        {Array.isArray(data) ? (
+          <div></div>
+        ) : (
+          <Container>
+            <div className="flex flex-col items-center gap-12 md:flex-row md:items-start md:justify-center">
+              <div className="flex flex-col items-center gap-4">
+                <span
+                  className="max-w-sm overflow-hidden text-center opacity-0 font-barlow-bold text-heading-3 md:max-w-none"
+                  ref={introTitleRef}
+                >
+                  A wanderer is not always lost.
+                </span>
+                <p
+                  className="max-w-sm overflow-hidden leading-tight text-center opacity-0 text-body-2 md:max-w-xl"
+                  ref={introTextRef}
+                >
+                  But sometimes, they can use a little direction. <br /> Get
+                  started by selecting a playlist.
+                </p>
+                <Cta
+                  onClick={() => setShowPopup(true)}
+                  passedRef={openPopupButtonRef}
+                  className="opacity-0"
+                >
+                  Select Playlist
+                </Cta>
+              </div>
+              <div
+                className="w-4/12 max-w-xs opacity-0 md:max-w-tiny xl:max-w-xxs"
+                ref={introIllustrationRef}
+              >
+                <NoDataIllustration />
+              </div>
+            </div>
+          </Container>
+        )}
+      </div>
     </div>
-  </div>
+  );
 }
 
 // export default function Stats() {
