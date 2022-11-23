@@ -16,14 +16,14 @@ export default function getInitialStats(data) {
   const humanReadableduration = getDurationFromMs(duration);
   if (humanReadableduration) {
     initialStats.push({
-      label: "⏳Total playlist duration",
+      label: "Total playlist duration",
       value: humanReadableduration,
     });
   }
 
   if (amountSongs) {
     initialStats.push({
-      label: "🔢Total amount of tracks",
+      label: "Total amount of tracks",
       value: amountSongs,
     });
   }
@@ -31,7 +31,7 @@ export default function getInitialStats(data) {
   const avgSongLength = getSongsAverageLength(amountSongs, duration);
   if (avgSongLength) {
     initialStats.push({
-      label: "🕐Average song length",
+      label: "Average song length",
       value: avgSongLength,
     });
   }
@@ -42,7 +42,7 @@ export default function getInitialStats(data) {
       shortestSong?.track?.duration_ms
     );
     initialStats.push({
-      label: "🏃Shortest song",
+      label: "Shortest song",
       value: shortestReadableDuration,
     });
   }
@@ -53,7 +53,7 @@ export default function getInitialStats(data) {
       longestSong?.track?.duration_ms
     );
     initialStats.push({
-      label: "🥱 Longest song",
+      label: "Longest song",
       value: longestSongduration,
     });
   }

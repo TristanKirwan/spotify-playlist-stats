@@ -6,9 +6,12 @@ import Container from "../components/Container";
 import Cta from "../components/Cta";
 import NoDataIllustration from "../components/NoDataIllustration";
 import PlaylistPopup from "../components/PlaylistPopup";
+import PlaylistIntro from '../components/PlaylistIntro';
+import getInitialStats from '../utils/getInitialStats'
 
 export default function StatsPage() {
   const [data, setData] = useState(null);
+  const [initialPlaylistStats, setInitialPlaylistStats] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
 
   const introTitleRef = useRef(null);
@@ -70,6 +73,9 @@ export default function StatsPage() {
         autoplay: false,
         complete: function(){ 
           setData(fetcher.data)
+          console.log('fetcher.data', fetcher.data);
+          const initialStats = getInitialStats(fetcher.data)
+          setInitialPlaylistStats(initialStats)
         }
       })
       .add({
@@ -120,7 +126,7 @@ export default function StatsPage() {
     <PlaylistPopup isOpen={showPopup} closeCallBack={() => setShowPopup(false)} fetcher={fetcher}/>
     <div>
       {Array.isArray(data) ? <div>
-        Hi, there is now fetcher data so we show the chart options + chart
+        <PlaylistIntro initialStats={initialPlaylistStats} />
       </div> :
       <Container>
         <div className="flex flex-col items-center gap-12 md:flex-row md:items-start md:justify-center">
