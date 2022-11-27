@@ -79,8 +79,11 @@ const graphOptions = [
   },
 ];
 
+const animationDuration = 800;
+
 export default function ChartView({ playlistName, data }) {
   const [chartOptions, setChartOptions] = useState(null);
+  const [showChart, setShowChart] = useState(false);
   const sideBarRef = useRef(null);
   const playlistNameRef = useRef(null);
   const illustrationRef = useRef(null);
@@ -99,8 +102,6 @@ export default function ChartView({ playlistName, data }) {
       !getStartedTextRef?.current
     )
       return;
-
-    const animationDuration = 800;
 
     anime
       .timeline({
@@ -139,6 +140,26 @@ export default function ChartView({ playlistName, data }) {
         `-=${animationDuration}`
       );
   }, []);
+
+  useEffect(() => {
+    // If the initial chart data is made, we fade out the select a chart part
+    // and render the chart renderer instead.
+    if (chartOptions && !showChart) {
+      if (illustrationRef?.current && getStartedTextRef?.current) {
+        anime({
+          targets: [illustrationRef.current, getStartedTextRef.current],
+          duration: animationDuration,
+          easing: "easeOutCubic",
+          opacity: [1, 0],
+          complete: () => {
+            setShowChart(true);
+          },
+        });
+      } else {
+        setShowChart(true);
+      }
+    }
+  }, [chartOptions, showChart]);
 
   return (
     <div>
@@ -193,7 +214,7 @@ export default function ChartView({ playlistName, data }) {
               {playlistName}
             </h1>
           )}
-          {chartOptions ? (
+          {showChart ? (
             <ChartRenderer options={chartOptions} />
           ) : (
             <div className="flex flex-col items-center gap-2">
