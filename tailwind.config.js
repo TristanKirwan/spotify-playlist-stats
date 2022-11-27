@@ -8,6 +8,7 @@ module.exports = {
       primary: "#3A6EA5",
       secondary: "#7A8450",
       tertiary: "#88292F",
+      black: "#00161d",
       transparent: "transparent",
     },
     fontFamily: {
@@ -55,7 +56,7 @@ module.exports = {
         xxs: "15rem",
       },
       transitionDuration: {
-        DEFAULT: '300ms'
+        DEFAULT: "300ms",
       },
       minWidth: {
         xs: "18.75rem",

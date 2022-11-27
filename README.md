@@ -27,7 +27,17 @@
 - Revamp UI
 - changing charts bug
 - Replacing user ID functionality
+- Clean up unused components
 
 # Future ideas if ever possible:
 
 - Number of songs per genre (if possible) -> Could be solved with track audio features (energetic danceability etc)
+
+# To thanks:
+
+- Hero icons
+- Hero backgrounds?
+- Apex charts
+- Remix
+- Spotify API
+- Tailwind

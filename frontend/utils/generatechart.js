@@ -1,30 +1,28 @@
 // Data mapping functions
+import BarOptions from "./chartOptions/bar";
+import averageLengthPerLetterOptions from "./chartOptions/charts/averageLengthPerLetter";
+import averagePopularityPerPersonOptions from "./chartOptions/charts/averagePopularityPerPerson";
+import longestShortestSongPerLetterOptions from "./chartOptions/charts/longestShortestSongPerLetter";
+import maxOfArtistPerPersonOptions from "./chartOptions/charts/maxOfArtistPerPerson";
+import numberPerArtistOptions from "./chartOptions/charts/numberPerArtis";
+import percentageLengthPerLetterOptions from "./chartOptions/charts/percentageLengthPerLetter";
+// Option functions
+import percentagePerLetterOptions from "./chartOptions/charts/percentagePerLetter";
+import playlistLengthPerPersonOptions from "./chartOptions/charts/playlistLengthPerPerson";
+import playlistLengthPerPersonPercentOptions from "./chartOptions/charts/playlistLengthPerPersonPercent";
+import songsPerPersonOptions from "./chartOptions/charts/songsPerPerson";
+// General options
+import PieOptions from "./chartOptions/pie";
+import TableOptions from "./chartOptions/table";
+import getAverageLengthPerLetter from "./getAverageLengthPerLetter";
+import getAveragePopularityPerPerson from "./getAveragePopularityPerPerson";
+import getLengthPerLetterPercentage from "./getLengthPerLetterPercentage";
+import getLongestAndShortesSongPerLetter from "./getLongestAndShortesSongPerLetter";
+import getMaxArtistPerPerson from "./getMaxArtistPerPerson";
 import getPercentagePerLetter from "./getPercentagePerLetter";
 import getSongAmountPerArtist from "./getSongAmountPerArtist";
 import getSongsPerPerson from "./getSongsPerPerson";
 import getTotalPlaylistLengthPerPerson from "./getTotalPlaylistLengthPerPerson";
-import getLengthPerLetterPercentage from './getLengthPerLetterPercentage';
-import getAverageLengthPerLetter from './getAverageLengthPerLetter';
-import getAveragePopularityPerPerson from './getAveragePopularityPerPerson'
-import getMaxArtistPerPerson from './getMaxArtistPerPerson';
-import getLongestAndShortesSongPerLetter from './getLongestAndShortesSongPerLetter'
-
-// General options
-import PieOptions from "./chartOptions/pie";
-import BarOptions from './chartOptions/bar';
-import TableOptions from './chartOptions/table';
-
-// Option functions
-import percentagePerLetterOptions from './chartOptions/charts/percentagePerLetter';
-import numberPerArtistOptions from "./chartOptions/charts/numberPerArtis";
-import songsPerPersonOptions from "./chartOptions/charts/songsPerPerson";
-import playlistLengthPerPersonOptions from "./chartOptions/charts/playlistLengthPerPerson";
-import playlistLengthPerPersonPercentOptions from './chartOptions/charts/playlistLengthPerPersonPercent'
-import percentageLengthPerLetterOptions from './chartOptions/charts/percentageLengthPerLetter'
-import averageLengthPerLetterOptions from './chartOptions/charts/averageLengthPerLetter';
-import averagePopularityPerPersonOptions from './chartOptions/charts/averagePopularityPerPerson';
-import maxOfArtistPerPersonOptions from './chartOptions/charts/maxOfArtistPerPerson';
-import longestShortestSongPerLetterOptions from './chartOptions/charts/longestShortestSongPerLetter'
 
 const chartNameDataMap = {
   numberPerArtist: getSongAmountPerArtist,
@@ -36,7 +34,7 @@ const chartNameDataMap = {
   avgLengthPerLetter: getAverageLengthPerLetter,
   avgPopularityPerPerson: getAveragePopularityPerPerson,
   maxOfArtistPerPerson: getMaxArtistPerPerson,
-  longestShortestSongPerLetter: getLongestAndShortesSongPerLetter
+  longestShortestSongPerLetter: getLongestAndShortesSongPerLetter,
 };
 
 const chartOptionsMap = {
@@ -49,7 +47,7 @@ const chartOptionsMap = {
   avgLengthPerLetter: BarOptions,
   avgPopularityPerPerson: BarOptions,
   maxOfArtistPerPerson: BarOptions,
-  longestShortestSongPerLetter: TableOptions
+  longestShortestSongPerLetter: TableOptions,
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -60,20 +58,20 @@ function chartSpecificSeriesMapping(chartName, options, data) {
       return numberPerArtistOptions(options, data);
     case "songsPerPerson":
       return songsPerPersonOptions(options, data);
-    case "playlistLengthPerPerson": 
+    case "playlistLengthPerPerson":
       return playlistLengthPerPersonOptions(options, data);
     case "playlistLengthPerPersonPercent":
       return playlistLengthPerPersonPercentOptions(options, data);
     case "lengthPerLetter":
       return percentageLengthPerLetterOptions(options, data);
-    case "avgLengthPerLetter": 
-      return averageLengthPerLetterOptions(options, data)
+    case "avgLengthPerLetter":
+      return averageLengthPerLetterOptions(options, data);
     case "avgPopularityPerPerson":
-      return averagePopularityPerPersonOptions(options, data)
+      return averagePopularityPerPersonOptions(options, data);
     case "maxOfArtistPerPerson":
-      return maxOfArtistPerPersonOptions(options, data)
+      return maxOfArtistPerPersonOptions(options, data);
     case "longestShortestSongPerLetter":
-      return longestShortestSongPerLetterOptions(options, data)
+      return longestShortestSongPerLetterOptions(options, data);
   }
 }
 
