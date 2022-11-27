@@ -1,9 +1,11 @@
+import anime from "animejs";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChartRenderer from "../components/charts/ChartRenderer";
 import Container from "../components/Container";
 import Icon from "../components/Icon/Icon";
 import generateChart from "../utils/generatechart";
+import GirlWithHeadphoneIllustration from "./GirlWithHeadphonesIllustration";
 
 const graphOptions = [
   {
@@ -79,17 +81,73 @@ const graphOptions = [
 
 export default function ChartView({ playlistName, data }) {
   const [chartOptions, setChartOptions] = useState(null);
+  const sideBarRef = useRef(null);
+  const playlistNameRef = useRef(null);
+  const illustrationRef = useRef(null);
+  const getStartedTextRef = useRef(null);
 
   function graphItemClick(id) {
     const chartOptions = generateChart(id, data);
     setChartOptions(chartOptions);
   }
 
+  useEffect(() => {
+    if (
+      !sideBarRef?.current ||
+      !playlistNameRef?.current ||
+      !illustrationRef?.current ||
+      !getStartedTextRef?.current
+    )
+      return;
+
+    const animationDuration = 800;
+
+    anime
+      .timeline({
+        easing: "easeOutCubic",
+        duration: animationDuration,
+      })
+      .add({
+        targets: sideBarRef.current.childNodes,
+        translateX: ["-1.5rem", "0rem"],
+        opacity: [0, 1],
+        delay: anime.stagger(0.25 * animationDuration),
+        begin: function () {
+          anime.set(sideBarRef.current, { opacity: 1 });
+        },
+      })
+      .add(
+        {
+          targets: playlistNameRef.current,
+          opacity: [0, 1],
+          translateX: ["2rem", "0rem"],
+        },
+        `-=${animationDuration}`
+      )
+      .add(
+        {
+          targets: illustrationRef.current,
+          opacity: [0, 1],
+        },
+        `-=${0.5 * animationDuration}`
+      )
+      .add(
+        {
+          targets: getStartedTextRef.current,
+          opacity: [0, 1],
+        },
+        `-=${animationDuration}`
+      );
+  }, []);
+
   return (
     <div>
       <Container containerClass="graph-view-container md:items-start">
         <aside className="py-12 md:min-h-screen md:sticky md:top-0">
-          <ul className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 md:flex md:flex-col">
+          <ul
+            className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 md:flex md:flex-col"
+            ref={sideBarRef}
+          >
             {Array.isArray(graphOptions) &&
               graphOptions.length > 0 &&
               graphOptions.map((group) => {
@@ -100,7 +158,7 @@ export default function ChartView({ playlistName, data }) {
                   return;
                 return (
                   <li
-                    className="pt-3 first:pt-0 sm:pt-0 md:w-full"
+                    className="pt-3 opacity-0 first:pt-0 sm:pt-0 md:w-full"
                     key={group?.groupTitle}
                   >
                     <Accordion
@@ -126,12 +184,32 @@ export default function ChartView({ playlistName, data }) {
               })}
           </ul>
         </aside>
-        <main className="md:py-12">
-          {playlistName && <h1>{playlistName}</h1>}
+        <main className="flex flex-col gap-4 md:py-12 md:gap-8">
+          {playlistName && (
+            <h1
+              className="text-heading-3 font-barlow-bold text-center opacity-0"
+              ref={playlistNameRef}
+            >
+              {playlistName}
+            </h1>
+          )}
           {chartOptions ? (
             <ChartRenderer options={chartOptions} />
           ) : (
-            <h2>Select a chart on the left side</h2>
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className="w-4/12 max-w-xs opacity-0 md:max-w-tiny xl:max-w-xxs"
+                ref={illustrationRef}
+              >
+                <GirlWithHeadphoneIllustration />
+              </div>
+              <h2
+                className="text-heading-5 font-barlow-semibold opacity-0"
+                ref={getStartedTextRef}
+              >
+                Get started by picking picking a statistic!
+              </h2>
+            </div>
           )}
         </main>
       </Container>
