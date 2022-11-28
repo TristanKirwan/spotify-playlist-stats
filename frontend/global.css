@@ -57,14 +57,6 @@
   --body-2-line-height: 1.5rem;
   --body-3: 1rem;
   --body-3-line-height: 1.5rem;
-  --body-4: 0.875rem;
-  --body-4-line-height: 1.3125rem;
-
-  /* Other texts */
-  --button-text-1: 1rem;
-  --button-text-1-line-height: 1.5rem;
-  --button-text-2: 0.875rem;
-  --button-text-2-line-height: 1.6875rem;
 }
 
 html,
@@ -194,8 +186,6 @@ p {
     --body-2-line-height: 2.25rem;
     --body-3: 1.25rem;
     --body-3-line-height: 1.875;
-    --body-4: 1rem;
-    --body-4-line-height: 1.5rem;
   }
 
   .stats-page-wrapper {

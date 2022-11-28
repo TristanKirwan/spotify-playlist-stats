@@ -24,10 +24,10 @@
 
 - Route protection
 - Refresh auth token automatically
-- Revamp UI
+- ~~Revamp UI~~
 - changing charts bug
 - Replacing user ID functionality
-- Clean up unused components
+- ~~Clean up unused components~~
 
 # Future ideas if ever possible:
 
