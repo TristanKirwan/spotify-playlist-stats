@@ -1,4 +1,5 @@
 import { redirect } from "@remix-run/node";
+import { authTokenCookie, refreshTokenCookie } from "../utils/cookies";
 import generateAuthorizationLink from "../utils/generateAuthorizationLink";
 import getAuthToken from "../utils/getAuthToken";
 
@@ -7,12 +8,15 @@ export const loader = async ({ request }) => {
     request
   );
   if (accessToken && refreshToken && authExpiresIn) {
+    const headers = new Headers();
+    headers.append("Set-Cookie", await authTokenCookie.serialize(accessToken));
+    headers.append(
+      "Set-Cookie",
+      await refreshTokenCookie.serialize(refreshToken)
+    );
+
     return redirect("/stats", {
-      headers: {
-        // TODO: fix refresh token here
-        "Set-Cookie": `rToken=${refreshToken};`,
-        "Set-Cookie": `aToken=${accessToken}; Max-Age=${authExpiresIn}`,
-      },
+      headers,
     });
   } else {
     return redirect("/");

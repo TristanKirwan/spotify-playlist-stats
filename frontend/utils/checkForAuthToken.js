@@ -1,9 +1,13 @@
 import { redirect } from "@remix-run/node";
+import { authTokenCookie, refreshTokenCookie } from "./cookies";
 
 export default async function checkForAuthToken(request) {
-  const cookie = request.headers.get("cookie");
+  const cookies = request.headers.get("cookie");
 
-  if (cookie.indexOf("aToken=") <= 0) {
+  const hasAuthToken = await authTokenCookie.parse(cookies);
+  const hasRefreshToken = await refreshTokenCookie.parse(cookies);
+
+  if (!hasAuthToken || !hasRefreshToken) {
     throw redirect("/");
   }
 
