@@ -22,7 +22,7 @@
 
 # TO DO:
 
-- Route protection
+- ~~Route protection~~
 - Refresh auth token automatically
 - ~~Revamp UI~~
 - changing charts bug

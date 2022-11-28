@@ -1,10 +1,11 @@
+import { redirect } from "@remix-run/node";
+
 export default async function getAuthToken(request) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
 
   if (!code) {
-    // TODO: redirect to homepage.
-    return {};
+    return redirect("/");
   }
 
   const clientId = process?.env?.client_id;
