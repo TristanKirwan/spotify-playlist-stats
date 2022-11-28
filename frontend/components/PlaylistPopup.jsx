@@ -27,13 +27,6 @@ export default function PlaylistPopup({ isOpen, closeCallBack, fetcher }) {
     if (isOpen && hasReceivedData.current) {
       hasReceivedData.current = false;
     }
-    // TODO: Remove.
-    if (isOpen) {
-      fetcher.submit(
-        { playlistID: "3NQ42UOhvdXToVPoDkmSRG" },
-        { method: "POST", action: "/actions/getPlaylistInfo" }
-      );
-    }
   }, [isOpen]);
 
   return (
@@ -41,18 +34,21 @@ export default function PlaylistPopup({ isOpen, closeCallBack, fetcher }) {
       isOpen={isOpen}
       closeCallback={closeCallBack}
       allowScrolling={fetcher?.state !== "submitting"}
+      fetcher={fetcher}
     >
       <div className="relative flex flex-col gap-8 ">
         {/* Loader */}
         <div
           className={clsx(
-            "absolute top-0 left-0 w-[calc(100%_+_4rem)] h-[calc(100%_+_3rem)] -translate-x-8 -translate-y-8 bg-text/80 flex items-center justify-center transition-opacity",
+            "absolute top-0 left-0 w-[calc(100%_+_4rem)] h-[calc(100%_+_3rem)] -translate-x-8 -translate-y-8 bg-text/80 transition-opacity",
             fetcher?.state === "submitting"
               ? "opacity-100"
               : "pointer-events-none opacity-0"
           )}
         >
-          <CircleLoader />
+          <div className="flex absolute top-0 left-0 h-[75vh] w-full items-center justify-center">
+            <CircleLoader />
+          </div>
         </div>
         <h2 className="font-barlow-bold text-body-1">Get playlist data</h2>
         {/* Form */}

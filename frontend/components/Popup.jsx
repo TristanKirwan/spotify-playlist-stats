@@ -9,6 +9,7 @@ export default function Popup({
   closeCallback,
   allowScrolling,
   children,
+  fetcher,
 }) {
   const wrapperRef = useRef(null);
   const backgroundRef = useRef(null);
@@ -17,8 +18,8 @@ export default function Popup({
   const wasOpenBefore = useRef(false);
 
   useEffect(() => {
+    toggleBodyScrolling(isOpen);
     if (isOpen) {
-      toggleBodyScrolling();
     }
   }, [isOpen]);
 
@@ -91,7 +92,9 @@ export default function Popup({
       <div
         className={clsx(
           "relative max-w-xl px-8 pt-8 pb-4 min-w-xs bg-background max-h-[75vh] md:min-w-sm opacity-0",
-          allowScrolling ? "overflow-auto" : "overflow-hidden"
+          allowScrolling && fetcher?.state !== "submitting"
+            ? "overflow-auto"
+            : "overflow-hidden"
         )}
         ref={popupRef}
       >
@@ -100,7 +103,7 @@ export default function Popup({
           aria-label="Close popup"
           className="absolute transition-transform rotate-0 top-2 right-2 hover:rotate-90"
         >
-          <Icon type="close" className="w-6 h-6 aspect-square" />
+          <Icon type="cross" className="w-6 h-6 aspect-square" />
         </button>
         {children}
       </div>

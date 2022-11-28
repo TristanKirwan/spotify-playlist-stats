@@ -208,7 +208,7 @@ export default function ChartView({ playlistName, data }) {
         <main className="flex flex-col gap-4 md:py-12 md:gap-8">
           {playlistName && (
             <h1
-              className="text-heading-3 font-barlow-bold text-center opacity-0"
+              className="text-heading-3 font-barlow-bold opacity-0"
               ref={playlistNameRef}
             >
               {playlistName}

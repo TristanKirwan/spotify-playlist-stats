@@ -1,8 +1,11 @@
-export default function toggleBodyScrolling(){
-  if(!document) return;
+export default function toggleBodyScrolling(enable) {
+  if (!document) return;
 
-  const body = document.querySelector('body');
-  if(!body) return;
+  const body = document.querySelector("body");
+  if (!body) return;
 
-  return body.classList.toggle('overflow-hidden')
+  if (enable) {
+    return body.classList.add("overflow-hidden");
+  }
+  return body.classList.remove("overflow-hidden");
 }

@@ -151,7 +151,7 @@ export default function StatsPage() {
         closeCallBack={() => setShowPopup(false)}
         fetcher={fetcher}
       />
-      <div className="h-full">
+      <div className="h-full min-h-screen flex items-center">
         {data?.tracks ? (
           <>
             {showIntro ? (
@@ -165,7 +165,7 @@ export default function StatsPage() {
             )}
           </>
         ) : (
-          <Container containerClass="py-12">
+          <Container containerClass="py-12 w-full">
             <div className="flex flex-col items-center gap-12 md:flex-row md:items-start md:justify-center">
               <div className="flex flex-col items-center gap-4">
                 <span
