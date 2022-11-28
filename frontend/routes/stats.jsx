@@ -8,7 +8,13 @@ import Cta from "../components/Cta";
 import NoDataIllustration from "../components/NoDataIllustration";
 import PlaylistIntro from "../components/PlaylistIntro";
 import PlaylistPopup from "../components/PlaylistPopup";
+import checkForAuthToken from "../utils/checkForAuthToken";
 import getInitialStats from "../utils/getInitialStats";
+
+export async function loader({ request }) {
+  await checkForAuthToken(request);
+  return null;
+}
 
 export default function StatsPage() {
   const [data, setData] = useState(null);

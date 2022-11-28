@@ -1,7 +1,6 @@
 import { redirect } from "@remix-run/node";
 import generateAuthorizationLink from "../utils/generateAuthorizationLink";
 import getAuthToken from "../utils/getAuthToken";
-import returnEnvVars from "../utils/returnEnvVars";
 
 export const loader = async ({ request }) => {
   const { accessToken, refreshToken, authExpiresIn } = await getAuthToken(
@@ -16,7 +15,7 @@ export const loader = async ({ request }) => {
       },
     });
   } else {
-    return returnEnvVars();
+    return redirect("/");
   }
 };
 

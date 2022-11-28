@@ -10,14 +10,14 @@ async function getPlaylistName(playlistID, token) {
         "Content-type": "application/json",
       },
     }
-  )
+  );
 
   try {
     const data = await response.json();
     const name = data?.name;
-    return name
+    return name;
   } catch (error) {
-    console.log('Something went wrong retrieving playlist metadata.', error)
+    console.log("Something went wrong retrieving playlist metadata.", error);
   }
 }
 
@@ -72,7 +72,7 @@ export const action = async ({ request }) => {
 
   if (!accessToken) return { error: true };
 
-  const playlistName = await getPlaylistName(playlistID, accessToken)
+  const playlistName = await getPlaylistName(playlistID, accessToken);
   const trackData = await getItemsSegment(0, playlistID, accessToken);
 
   if (!trackData || !playlistName) {
@@ -84,6 +84,6 @@ export const action = async ({ request }) => {
 
   return {
     name: playlistName,
-    tracks: filteredData
+    tracks: filteredData,
   };
 };
