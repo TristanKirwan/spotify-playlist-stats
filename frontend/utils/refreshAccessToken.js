@@ -1,27 +1,19 @@
-import { redirect } from "@remix-run/node";
+import { authTokenCookie, refreshTokenCookie } from "./cookies";
 
-export default async function getAuthToken(request) {
-  const url = new URL(request.url);
-  const code = url.searchParams.get("code");
+export default async function refreshAccessToken({ request }) {
+  const cookies = request.headers.get("cookie");
 
-  if (!code) {
-    return redirect("/");
-  }
-
+  const refreshTokenVal = await refreshTokenCookie.parse(cookies);
   const clientId = process?.env?.client_id;
   const clientSecret = process?.env?.client_secret;
-  const redirectUri = process?.env?.redirect_uri;
-
-  if (!clientId || !clientSecret) return null;
 
   const authString = new Buffer(clientId + ":" + clientSecret).toString(
     "base64"
   );
 
   const jsonBody = {
-    grant_type: "authorization_code",
-    code: code,
-    redirect_uri: redirectUri,
+    grant_type: "refresh_token",
+    refresh_token: refreshTokenVal,
   };
 
   let formBody = [];
@@ -35,7 +27,7 @@ export default async function getAuthToken(request) {
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
-      Authorization: `Basic ${authString}`,
+      Authorization: "Basic " + authString,
       "Content-type": "application/x-www-form-urlencoded",
     },
     body: formBody,
@@ -43,16 +35,19 @@ export default async function getAuthToken(request) {
 
   try {
     const data = await response.json();
-    const accessToken = data?.access_token;
-    const refreshToken = data?.refresh_token;
-    const authExpiresIn = data?.expires_in;
+    const newAccessToken = data?.access_token;
 
-    return {
-      accessToken,
-      refreshToken,
-      authExpiresIn,
-    };
-  } catch {
-    return {};
+    if (!newAccessToken) {
+      throw data;
+    }
+
+    await authTokenCookie.serialize(newAccessToken);
+    return newAccessToken;
+  } catch (error) {
+    console.log(
+      "Something went wrong trying to refresh the auth token.",
+      error
+    );
+    throw error;
   }
 }

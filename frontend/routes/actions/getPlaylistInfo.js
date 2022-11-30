@@ -1,4 +1,6 @@
-import getCookiesFromRequest from "../../utils/getCookiesFromRequest";
+import { json } from "@remix-run/node";
+import { authTokenCookie, refreshTokenCookie } from "../../utils/cookies";
+import refreshAccessToken from "../../utils/refreshAccessToken";
 
 async function getPlaylistName(playlistID, token) {
   const response = await fetch(
@@ -14,10 +16,16 @@ async function getPlaylistName(playlistID, token) {
 
   try {
     const data = await response.json();
+    if (data?.error) {
+      // Spotify can throw a valid response with an error, if there is one we
+      // will throw
+      throw data?.error;
+    }
     const name = data?.name;
     return name;
   } catch (error) {
     console.log("Something went wrong retrieving playlist metadata.", error);
+    throw error;
   }
 }
 
@@ -57,33 +65,102 @@ async function getItemsSegment(offset = 0, playlistID, token) {
 
     return items;
   } catch (error) {
-    console.log("something went wrong", error);
-    return null;
+    console.log(
+      "something went wrong getting a segment of playlist items.",
+      error
+    );
+    throw error;
   }
+}
+
+async function getPlaylistInfo(playlistID, accessToken) {
+  try {
+    const playlistName = await getPlaylistName(playlistID, accessToken);
+    const trackData = await getItemsSegment(0, playlistID, accessToken);
+
+    if (!trackData || !playlistName) {
+      return {
+        error: true,
+      };
+    }
+    const filteredData = trackData.filter((item) => item?.track);
+    return {
+      name: playlistName,
+      tracks: filteredData,
+    };
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function handleTokenError(responseHeaders, errorMessage) {
+  // Reset cookie value both internally and in browser
+  responseHeaders.append(
+    "Set-Cookie",
+    await authTokenCookie.serialize(null, {
+      expires: new Date(Date.now()),
+    })
+  );
+  responseHeaders.append(
+    "Set-Cookie",
+    await refreshTokenCookie.serialize(null, {
+      expires: new Date(Date.now()),
+    })
+  );
+
+  return json(
+    { error: errorMessage },
+    {
+      headers: responseHeaders,
+    }
+  );
 }
 
 export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
   const { playlistID } = formData;
 
-  const cookieString = request.headers.get("cookie");
-  const allCookies = getCookiesFromRequest(cookieString);
-  const { aToken: accessToken } = allCookies;
+  const cookieHeader = request.headers.get("cookie");
+  let accessToken = (await authTokenCookie.parse(cookieHeader)) || null;
 
   if (!accessToken) return { error: true };
 
-  const playlistName = await getPlaylistName(playlistID, accessToken);
-  const trackData = await getItemsSegment(0, playlistID, accessToken);
+  const responseHeaders = new Headers();
 
-  if (!trackData || !playlistName) {
-    return {
-      error: true,
-    };
+  try {
+    const data = await getPlaylistInfo(playlistID, accessToken);
+    return data;
+  } catch (e) {
+    // Invalid or expired auth token will try to get a new one. If that fails
+    // the cookies are reset and user is redirected.
+    if (e?.status === 401 || e?.status === 400) {
+      let newAccessToken = null;
+      try {
+        newAccessToken = await refreshAccessToken({ request });
+
+        // If auth token cannot be refreshed, catch is hit. Otherwise we
+        // continue with the assumption of a correct auth token.
+        const data = await getPlaylistInfo(playlistID, newAccessToken);
+
+        // Make sure we update the accessToken cookie
+        responseHeaders.append(
+          "Set-Cookie",
+          await authTokenCookie.serialize(newAccessToken)
+        );
+        return json(data, {
+          headers: responseHeaders,
+        });
+      } catch (e) {
+        return await handleTokenError(
+          responseHeaders,
+          `Something went wrong trying to get playlist info with an expired auth token. ${e}`
+        );
+      }
+    }
   }
-  const filteredData = trackData.filter((item) => item?.track);
 
+  // Should never hit, but as a backup we return an error object.
   return {
-    name: playlistName,
-    tracks: filteredData,
+    error: true,
   };
 };
