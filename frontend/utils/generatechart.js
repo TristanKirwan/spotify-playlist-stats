@@ -38,16 +38,16 @@ const chartNameDataMap = {
 };
 
 const chartOptionsMap = {
-  numberPerArtist: BarOptions,
-  songsPerPerson: PieOptions,
-  percentagePerLetter: PieOptions,
-  playlistLengthPerPerson: BarOptions,
-  playlistLengthPerPersonPercent: PieOptions,
-  lengthPerLetter: PieOptions,
-  avgLengthPerLetter: BarOptions,
-  avgPopularityPerPerson: BarOptions,
-  maxOfArtistPerPerson: BarOptions,
-  longestShortestSongPerLetter: TableOptions,
+  numberPerArtist: JSON.parse(JSON.stringify(BarOptions)),
+  songsPerPerson: JSON.parse(JSON.stringify(PieOptions)),
+  percentagePerLetter: JSON.parse(JSON.stringify(PieOptions)),
+  playlistLengthPerPerson: JSON.parse(JSON.stringify(BarOptions)),
+  playlistLengthPerPersonPercent: JSON.parse(JSON.stringify(PieOptions)),
+  lengthPerLetter: JSON.parse(JSON.stringify(PieOptions)),
+  avgLengthPerLetter: JSON.parse(JSON.stringify(BarOptions)),
+  avgPopularityPerPerson: JSON.parse(JSON.stringify(BarOptions)),
+  maxOfArtistPerPerson: JSON.parse(JSON.stringify(BarOptions)),
+  longestShortestSongPerLetter: JSON.parse(JSON.stringify(TableOptions)),
 };
 
 function chartSpecificSeriesMapping(chartName, options, data) {
@@ -76,8 +76,14 @@ function chartSpecificSeriesMapping(chartName, options, data) {
 }
 
 function generateChartOptions(chartName, data) {
-  const options = chartOptionsMap[chartName];
+  const originOptions = chartOptionsMap[chartName];
+  const options = JSON.parse(JSON.stringify(originOptions));
   chartSpecificSeriesMapping(chartName, options, data);
+
+  options.chart = {
+    ...options?.chart,
+    id: chartName,
+  };
 
   return options;
 }
