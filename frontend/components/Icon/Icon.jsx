@@ -6,7 +6,7 @@ import Hashtag from "./types/Hashtag";
 import Heart from "./types/Heart";
 import PieChart from "./types/PieChart";
 import SquareStack from "./types/SquareStack";
-import Table from "./types/table";
+import Table from "./types/Table";
 import User from "./types/User";
 
 const icons = {

@@ -97,8 +97,8 @@ p {
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
   font-size: 0.875rem;
-  color: var(--white);
-  background-color: var(--black);
+  color: var(--black);
+  background-color: var(--background);
 }
 
 .apexcharts-xaxis-label,

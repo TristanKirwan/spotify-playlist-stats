@@ -1,15 +1,14 @@
-import defaultOptions from './default';
+import defaultOptions from "./default";
 
 export default {
   ...defaultOptions,
   type: "bar",
   plotOptions: {
     bar: {
-      horizontal: false
-    }
+      horizontal: false,
+    },
   },
-  series: [
-  ],
+  series: [],
   dataLabels: {
     enabled: true,
     formatter: function (val, opts) {
@@ -26,9 +25,10 @@ export default {
     },
   },
   tooltip: {
+    enabled: true,
     marker: {
-      show: false
+      show: false,
     },
-    ...defaultOptions?.tooltip
-  }
+    ...defaultOptions?.tooltip,
+  },
 };

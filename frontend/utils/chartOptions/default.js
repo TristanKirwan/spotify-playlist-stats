@@ -1,7 +1,7 @@
 export default {
   chart: {
     toolbar: {
-      show: false
+      show: false,
     },
   },
   dataLabels: {
@@ -18,27 +18,27 @@ export default {
     labels: {
       show: true,
       style: {
-        cssClass: 'apexcharts-xaxis-label'
-      }
-    }
+        cssClass: "apexcharts-xaxis-label",
+      },
+    },
   },
   yaxis: {
     labels: {
       show: true,
       style: {
-        cssClass: 'apexcharts-yaxis-label'
-      }
-    }
+        cssClass: "apexcharts-yaxis-label",
+      },
+    },
   },
   tooltip: {
     fontFamily: "barlow-regular, Helvetica, Arial",
-    fontSize: '14px',
+    fontSize: "14px",
     theme: false,
     x: {
-      show: true
+      show: true,
     },
     y: {
       show: true,
-    }
-  }
-}
+    },
+  },
+};

@@ -1,5 +1,4 @@
-import defaultOptions from './default';
-
+import defaultOptions from "./default";
 
 export default {
   ...defaultOptions,

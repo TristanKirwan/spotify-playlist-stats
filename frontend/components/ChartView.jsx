@@ -83,6 +83,8 @@ const animationDuration = 800;
 
 export default function ChartView({ playlistName, data }) {
   const [chartOptions, setChartOptions] = useState(null);
+  const [chartSeries, setChartSeries] = useState([]);
+  const [chartType, setChartType] = useState(null);
   const [showChart, setShowChart] = useState(false);
   const sideBarRef = useRef(null);
   const playlistNameRef = useRef(null);
@@ -91,7 +93,12 @@ export default function ChartView({ playlistName, data }) {
 
   function graphItemClick(id) {
     const chartOptions = generateChart(id, data);
+
+    const { series, type } = chartOptions;
+
     setChartOptions(chartOptions);
+    setChartSeries(series || []);
+    setChartType(type || "bar");
   }
 
   useEffect(() => {
@@ -162,7 +169,7 @@ export default function ChartView({ playlistName, data }) {
   }, [chartOptions, showChart]);
 
   return (
-    <div>
+    <div className="w-full">
       <Container containerClass="graph-view-container md:items-start">
         <aside className="py-12 md:min-h-screen md:sticky md:top-0">
           <ul
@@ -188,13 +195,12 @@ export default function ChartView({ playlistName, data }) {
                     >
                       <ul className="flex flex-col gap-2">
                         {group?.children.map((child) => (
-                          <li>
+                          <li key={child?.id}>
                             <GenerateChartButton
                               id={child?.id}
                               label={child?.label}
                               func={graphItemClick}
                               iconType={child?.iconType}
-                              key={child?.id}
                             />
                           </li>
                         ))}
@@ -215,7 +221,11 @@ export default function ChartView({ playlistName, data }) {
             </h1>
           )}
           {showChart ? (
-            <ChartRenderer options={chartOptions} />
+            <ChartRenderer
+              options={chartOptions}
+              series={chartSeries}
+              type={chartType}
+            />
           ) : (
             <div className="flex flex-col items-center gap-2">
               <div
