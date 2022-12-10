@@ -10,7 +10,7 @@ export default function PlaylistIntro({
   const statsContainerRef = useRef(null);
   const nameContainerRef = useRef(null);
   const singleAnimationDuration = 1000;
-  const outAnimationDelay = 1750;
+  const outAnimationDelay = 1250;
 
   useEffect(() => {
     if (

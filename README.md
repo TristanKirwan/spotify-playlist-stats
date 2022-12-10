@@ -27,7 +27,7 @@
 - ~~Revamp UI~~
 - ~~changing charts bug~~
 - Replacing user ID functionality
-- Update Table styling
+- ~~Update Table styling~~
 - Update button styling
 - ~~Clean up unused components~~
 
